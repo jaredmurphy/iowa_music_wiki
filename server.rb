@@ -1,0 +1,76 @@
+module IowaMusic
+  class Server < Sinatra::Base
+
+  	get '/' do
+  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		erb :home
+  	end
+  	# this will list all bands
+  	get '/bands' do
+  		@title = "bands"
+  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		@data = conn.exec("
+  			SELECT * FROM #{@title};").to_a
+  		erb :lists
+  	end
+
+  	get '/bands/:id' do
+  		@id = params[:id]
+  		 @title = "bands"
+  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		@data = conn.exec("
+  			SELECT * FROM #{@title} WHERE id = #{@id};").to_a
+  		erb :article
+  	end
+  	get '/labels' do
+  		@title = "labels"
+  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		@data = conn.exec("
+  			SELECT * FROM #{@title}").to_a
+  		erb :lists
+  	end
+  	 get '/labels/:id' do
+  		@id = params[:id]
+  		 @title = "labels"
+  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		@data = conn.exec("
+  			SELECT * FROM #{@title} WHERE id = #{@id};").to_a
+  		erb :article
+  	end
+  	get '/venues' do
+  		@title = "venues"
+  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		@data = conn.exec("
+  			SELECT * FROM #{@title}").to_a
+  		erb :lists
+  	end
+  	get '/venues/:id' do
+  		@id = params[:id]
+  		 @title = "venues"
+  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		@data = conn.exec("
+  			SELECT * FROM #{@title} WHERE id = #{@id};").to_a
+  		erb :article
+  	end
+  	get '/categories' do
+  		@title = "categories"
+  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		@data = conn.exec("
+  			SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';")
+  		erb :categories
+  	end
+
+  	get '/create_entry' do
+  		@title = "create entry"
+  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		@genres = conn.exec("SELECT * FROM genres;")
+  		@data = conn.exec("
+SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';")
+  		erb :form
+  	end
+
+
+end
+
+end
+

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Iowa Music Wiki</title>
+</head>
+<body>
+<header>
+	<h1 class = 'banner_title'>Iowa Music Wiki</h1>
+	<link rel="stylesheet" href="/css/styles.css">
+	<link rel="stylesheet" href="/css/normalize.css">
+	<link rel="stylesheet" href="/css/skeleton.css">
+</header>
+
+
+<nav >
+	<div id="menu" class="three columns">
+		<ul>
+			<a href="/"><li>Home</li></a>
+			<a href="/search"><li>Search</li></a>
+			<a href="/featured"><li>Today's Featured Artcle</li></a>
+			<a href="/random"><li>Random Article</li></a>
+			<a href="/categories"><li>Categories</li></a>
+			<a href="/authors"><li>Authors</li></a>
+			<a href ="/create_entry"><li>Contribute An Article</li></a>
+			<a href ="/donate"><li>Donate to Iowa Music Wiki</li></a>
+			<a href ="/about"><li>About</li></a>
+		</ul>
+	</div>
+</nav>
+    <%= yield %>
+<!-- <footer>
+	<h1 class="footer">Footer</h1>
+</footer> -->
+
+</body>
+</html>

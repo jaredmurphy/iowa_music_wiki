@@ -1,0 +1,16 @@
+
+<div id="list_content"  class="eight columns">
+	<h1 class="page_title"><%= @title.capitalize %></h1>
+	<% @data.each do |x| %>
+		<% table = "#{x['table_name']}" %>
+		<% if table == 'genres' %>
+			<!-- Do Nothing -->
+		<% elsif table != 'genres' %>
+			<a href="/<%= table %>"><input class="button-primary" type="submit" value="<%= table.capitalize %>"></a>
+		<% end %>
+
+
+	<% end %>
+
+
+</div>
