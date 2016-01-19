@@ -1,6 +1,4 @@
--- -- remove any records and start the id sequence back to 1
--- DROP TABLE IF EXISTS bands CASCADE;
--- DROP TABLE IF EXISTS labels CASCADE;
+
 require 'pg'
 
 if ENV["RACK_ENV"] == 'production'
