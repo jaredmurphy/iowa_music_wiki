@@ -1,0 +1,41 @@
+	<% @data.each do |x| %>
+	<% category =  %>
+	<% 1.times { @data do } %>
+		<% table = "#{x['table_name']}" %>
+		<% if table == 'genres' %>
+			<!-- Do Nothing -->
+		<% elsif table != 'genres' %>
+			<a href="/<%= table %>"><input class="button-primary" type="submit" value="<%= table.capitalize %>"></a>
+		<% end %>
+SELECT COUNT(*) FROM  wifi WHERE name = ‘Central Park'???
+
+	<% end %>
+
+
+
+
+
+
+<div id="list_content"  class="eight columns">
+	
+	<% @data.each do |x| %>
+		<% id = "#{x['id']}" %>
+		<% name = "#{x['name']}" %>
+		<% image = "#{x['img_url']}" %>
+		<% description = "#{x['description']}" %>
+		<% location = "#{x['location']}" %>
+		<% website = "#{x['website_url']}" %>
+
+		<h1 class="page_title"><%= name %></h1>
+
+		<!-- <a href="/<%= @title %>/<%= id %>"><p><%= name %></p></a> -->
+
+		<a href="/<%= @title %>/<%= id %>"><img src="<%= image %>"/></a>
+
+		<p><%= description %></p>
+		<p><%= location %></p>
+		<a href="<%= website %>"><input class="button-primary" type="submit" value="Website"></a>
+		<br>
+	<a href="/<%= @title %>"><input class="button" type="submit" value="Back to <%= @title.capitalize %>"</a>
+	<% end %>
+</div>

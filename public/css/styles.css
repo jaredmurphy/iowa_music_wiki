@@ -92,11 +92,17 @@ color: white;
 		float: right;
 	}
 
-
+	#categories {
+		margin-left: 0px;
+	}
 
 
 /*** ARTICLE ***/
 
+/* FORM */
+#form {
+	margin-right: 10px;
+}
 
 /*** FOOTER ***/
 	.footer {

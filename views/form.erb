@@ -1,69 +1,51 @@
-
-<div id="form" class="nine columns">
+<div id="form" class="eight columns">
 	<h4>Create an Entry</h4>
-
+	<% if @entry_submitted %>
+	<p> Thank you!</p>
+	<% else %>
+	<form class="create_entry" action="/create_entry" method="post">
+		<p>In order to create submit an entry please choose one of the following categories</p>
 	
-
-	<p>In order to create submit an entry please choose one of the following categories</p>
-	<% @data.each do |x| %>
-		<% table = "#{x['table_name']}" %>
+		<% @data.each do |x| %>
+			<% table = "#{x['table_name']}" %>
 			<% if table == 'genres' %>
 				<!-- Do Nothing -->
 			<% elsif table != 'genres' %>
 				<input class="button-primary" type="submit" value="<%= table %>">
 			<% end %>
+		<% end %>
+
+		<!-- for bands -->
+
+
+		<div class="input-row">
+			<label for="name">Band Name: </label>
+			<input  type="text" name="name" required/>
+		</div>
+		<div class="input-row">
+			<label for="location">City: </label>
+			<input  type="text" name="location" required/>
+		</div>
+		<div class="input-row">
+			<label for="genre_one">Genre: </label>
+			<input  type="text" name="genre_one" required/>
+		</div>
+		<div class="input-row">
+			<label for="img_url">Image URL: </label>
+			<input class="u-full-width" type="text" name="img_url" required/>
+		</div>
+		<div class="input-row">
+			<label for="website_url">Website URL: </label>
+			<input class="u-full-width" type="text" name="website_url"/>
+		</div>
+		<div class="input-row">
+			<label for="description">Description: </label>
+			<textarea class="u-full-width" name="description"></textarea>
+		</div>
+		<div class="input-row">
+			<input class="button-primary" type="submit" value="Submit"/>
+		</div>
+		<!-- end bands -->
+	</form>
 	<% end %>
-	
-
-	<p>Please choose: </p>
-
-	<p>
- 	<label for="name">Band Name</label>
-	<input class="u-half-width" type="email" placeholder="ex: The River Monks" id="band_name">
-	<!-- Band Click jquery response -->
-	<label>Which city is the band from?</label>
-	<input class="button-primary" type="submit" value="Ames">
-	<input class="button-primary" type="submit" value="Des Moines">
-	<input class="button-primary" type="submit" value="Davenport">
-	<input class="button-primary" type="submit" value="Marshalltown">
-	<input class="button-primary" type="submit" value="Iowa City">
-
-	<p>If your city is not listed above, you can enter it here</p>
-	 <label for="city">City</label>
-	 <input class="u-half-width" type="email" placeholder="ex: Dubuque" id="city">
-
-	<label>Choose up to 3 Genres to describe</label>
-	<% @genres.each do |x| %>
-		<% genre = "#{x['name']}" %>
-		<input class="button-primary" type="submit" value="<%= genre %>">
-	<% end %>
-	<!-- Labels Click jquery response -->
-	<!-- Venues Click jquery response -->
-
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-</div>
-
-
+</div>	

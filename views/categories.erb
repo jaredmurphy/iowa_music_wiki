@@ -1,6 +1,7 @@
 
 <div id="list_content"  class="eight columns">
 	<h1 class="page_title"><%= @title.capitalize %></h1>
+	<div id="categories" class="seven columns">
 	<% @data.each do |x| %>
 		<% table = "#{x['table_name']}" %>
 		<% if table == 'genres' %>
@@ -11,6 +12,7 @@
 
 
 	<% end %>
+	</div>
 
 
 </div>

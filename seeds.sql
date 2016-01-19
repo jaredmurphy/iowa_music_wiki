@@ -12,6 +12,27 @@ CREATE TABLE bands(
  website_url VARCHAR NOT NULL
 );
 
+CREATE TABLE albums(
+ id      SERIAL PRIMARY KEY,
+ name    VARCHAR(50),
+ band VARCHAR NOT NULL,
+ img_url VARCHAR NOT NULL,
+ location VARCHAR NOT NULL,
+ songs VARCHAR[] NOT NULL,
+ listen_url VARCHAR NOT NULL,
+ description VARCHAR NOT NULL
+);
+
+CREATE TABLE songs(
+ id      SERIAL PRIMARY KEY,
+ name    VARCHAR(50),
+ img_url VARCHAR,
+ band VARCHAR,
+ album VARCHAR,
+ lyrics TEXT,
+ description VARCHAR
+);
+
 CREATE TABLE labels(
  id      SERIAL PRIMARY KEY,
  name    VARCHAR(50) UNIQUE,
@@ -35,6 +56,47 @@ CREATE TABLE genres(
  name    VARCHAR(50) UNIQUE,
  description VARCHAR
 );
+
+
+CREATE TABLE festivals(
+ id      SERIAL PRIMARY KEY,
+ name    VARCHAR(50) UNIQUE,
+ img_url VARCHAR NOT NULL,
+ location VARCHAR NOT NULL,
+ description VARCHAR NOT NULL,
+ website_url VARCHAR NOT NULL
+);
+
+CREATE TABLE studios(
+ id      SERIAL PRIMARY KEY,
+ name    VARCHAR(50) UNIQUE,
+ img_url VARCHAR NOT NULL,
+ location VARCHAR NOT NULL,
+ description VARCHAR NOT NULL,
+ website_url VARCHAR NOT NULL
+);
+
+CREATE TABLE record_stores(
+ id      SERIAL PRIMARY KEY,
+ name    VARCHAR(50) UNIQUE,
+ img_url VARCHAR NOT NULL,
+ location VARCHAR NOT NULL,
+ description VARCHAR NOT NULL,
+ website_url VARCHAR NOT NULL,
+address VARCHAR NOT NULL
+);
+
+CREATE TABLE authors(
+ id      SERIAL PRIMARY KEY,
+ name    VARCHAR(50) UNIQUE,
+ email VARCHAR UNIQUE,
+ password VARCHAR,
+ img_url VARCHAR NOT NULL,
+ articles VARCHAR[] NOT NULL,
+ description VARCHAR NOT NULL
+);
+
+
 
 -- CREATE TABLE musicians(
 --   id           SERIAL PRIMARY KEY,
@@ -82,4 +144,4 @@ VALUES
   INSERT INTO genres
   (name)
   VALUES
-  ('reggae'), ('funk'), ('rock'), ('jazz'), ('r&b'), ('metal'), ('indie'), ('jam'), ('ska');
+  ('alternative'), ('folk'), ('reggae'), ('funk'), ('rock'), ('jazz'), ('r&b'), ('metal'), ('indie'), ('jam'), ('ska');

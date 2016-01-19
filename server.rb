@@ -65,10 +65,34 @@ module IowaMusic
   		conn = PG.connect(dbname: "iowa_music_wiki_db")
   		@genres = conn.exec("SELECT * FROM genres;")
   		@data = conn.exec("
-SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';")
+			SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';")
   		erb :form
   	end
 
+  	post "/create_entry" do
+    	name = params["name"]
+    	img_url = params["img_url"]
+    	genre_one = params["genre_one"]
+    	location = params["location"]
+    	description = params["description"]
+    	website_url = params["website_url"]
+    	
+    	conn = PG.connect(dbname: "iowa_music_wiki_db")
+    	conn.exec_params(
+    		"INSERT INTO bands (name, img_url, genre_one, location, description, website_url) 
+    		VALUES ($1, $2, $3, $4, $5, $6)",
+    		[name, img_url, genre_one, location, description, website_url]
+    	)
+
+    	@entry_submitted = true
+    	erb :form
+    end
+
+    get '/random' do
+  		@data = conn.exec("
+			SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';")
+  		erb :random
+  	end
 
 end
 
