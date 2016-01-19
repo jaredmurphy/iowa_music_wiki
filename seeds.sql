@@ -1,6 +1,18 @@
 -- -- remove any records and start the id sequence back to 1
 -- DROP TABLE IF EXISTS bands CASCADE;
 -- DROP TABLE IF EXISTS labels CASCADE;
+require 'pg'
+
+if ENV["RACK_ENV"] == 'production'
+  conn = PG.connect(
+    dbname: ENV["POSTGRES_DB"],
+    host: ENV["POSTGRES_HOST"],
+    password: ENV["POSTGRES_PASS"],
+    user: ENV["POSTGRES_USER"]
+  )
+else
+  conn = PG.connect(dbname: "iowa_music_wiki")
+end
 
 CREATE TABLE bands(
  id      SERIAL PRIMARY KEY,
