@@ -138,4 +138,4 @@ issues is a fantastic investment that will lead to greater mastery and understan
 
 [forum]: forum.md
 [wiki]: wiki.md
-[erd]: http://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model
+[erd]: http://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model# iowa_music_wiki
