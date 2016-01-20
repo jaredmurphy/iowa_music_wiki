@@ -13,10 +13,7 @@
 			<% if table == 'genres' || table == 'edits' || table == 'articles' || table == 'authors' %>
 				<!-- Do Nothing -->
 			<% elsif table != 'genres' && table != 'edits' && table != 'articles' && table != 'authors' %>
-				<!-- <input class="button-primary" type="submit" value="<%= table %>"> -->
-				
 					<option ><%=table.capitalize%></option>
-				
 			<% end %>
 		<% end %>
 		</select>
@@ -52,29 +49,29 @@
 		</div>
 		<!-- end bands -->
 		<!-- for venues -->
-<!-- 		<div class="input-row">
+		<div class="input-row">
 			<label for="name">Venue Name: </label>
-			<input  type="text" name="venue_name" required/>
+			<input  type="text" name="name" required/>
 		</div>
 		<div class="input-row">
 			<label for="location">City: </label>
-			<input  type="text" name="venue_location" required/>
+			<input  type="text" name="location" required/>
 		</div>
 		<div class="input-row">
 			<label for="img_url">Image URL: </label>
-			<input class="u-full-width" type="text" name="venue_img_url" required/>
+			<input class="u-full-width" type="text" name="img_url" required/>
 		</div>
 		<div class="input-row">
 			<label for="website_url">Website URL: </label>
-			<input class="u-full-width" type="text" name="venue_website_url"/>
+			<input class="u-full-width" type="text" name="website_url"/>
 		</div>
 		<div class="input-row">
 			<label for="description">Description: </label>
-			<textarea class="u-full-width" name="venue_description"></textarea>
+			<textarea class="u-full-width" name="description"></textarea>
 		</div>
 		<div class="input-row">
 			<input class="button-primary" type="submit" value="Submit"/>
-		</div> -->
+		</div>
 		<!-- end venues -->
 	</form>
 	<% end %>

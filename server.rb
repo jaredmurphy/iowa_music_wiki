@@ -90,6 +90,13 @@ module IowaMusic
       		[name, img_url, genre_one, location, description, website_url]
       	)
       end
+        if category == 'Venues'
+        conn.exec_params(
+          "INSERT INTO venues (name, img_url, location, description, website_url) 
+          VALUES ($1, $2, $3, $4, $5)",
+          [name, img_url, location, description, website_url]
+        )
+      end
       # conn.exec_params(
       #   "INSERT INTO venues (name, img_url, location, description, website_url) 
       #   VALUES ($1, $2, $3, $4, $5)",
