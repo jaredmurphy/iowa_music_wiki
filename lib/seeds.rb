@@ -114,7 +114,7 @@ conn.exec("DROP TABLE IF EXISTS genres")
 conn.exec("CREATE TABLE genres(
 	 id      SERIAL PRIMARY KEY,
 	 name    VARCHAR(50) UNIQUE,
-	 description VARCHAR,
+	 description VARCHAR
 	)"
 )
 
