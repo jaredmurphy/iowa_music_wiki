@@ -1,0 +1,20 @@
+<div id="form" class="eight columns">
+	<h4>Create an Entry</h4>
+
+
+			<p>In order to create submit an entry please choose one of the following categories</p>
+		
+		    <% @categories.each do |category| %>
+				
+				<a href="/create_entry/<%= category %>"><input class="button-primary" type="submit" value="<%= category.capitalize %>"></a>
+			<% end %>
+		
+	
+			
+		
+
+			
+		
+	
+
+</div>	
