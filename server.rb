@@ -78,6 +78,7 @@ module IowaMusic
   	end
     
     get '/create_entry/albums' do
+      @entry_submitted
       erb :albums
     end
 
@@ -92,7 +93,7 @@ module IowaMusic
           VALUES ($1, $2, $3, $4, $5)",
           [a_name, a_band, a_img_url, a_listen_url, a_description]
         )
-      @entry_submitted
+
       erb :albums
 
     end
