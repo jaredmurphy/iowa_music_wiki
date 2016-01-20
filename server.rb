@@ -92,6 +92,7 @@ module IowaMusic
           VALUES ($1, $2, $3, $4, $5)",
           [a_name, a_band, a_img_url, a_listen_url, a_description]
         )
+      @entry_submitted
       erb :albums
 
     end
