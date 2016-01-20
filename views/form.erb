@@ -6,7 +6,7 @@
 	<form class="create_entry" action="/create_entry" method="post">
 		<p>In order to create submit an entry please choose one of the following categories</p>
 	
-		<select name="Categories">
+		<select type='text' value='<%= category %>'name="Categories">
 		<input  type="text" name="category" required/>
 		<% @data.each do |x| %>
 			<% table = "#{x['table_name']}" %>
@@ -15,7 +15,7 @@
 			<% elsif table != 'genres' && table != 'edits' && table != 'articles' && table != 'authors' %>
 				<!-- <input class="button-primary" type="submit" value="<%= table %>"> -->
 				
-					<option value="<%= category %>"><%=table.capitalize%></option>
+					<option ><%=table.capitalize%></option>
 				
 			<% end %>
 		<% end %>
