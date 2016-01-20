@@ -13,7 +13,7 @@
 			<% elsif table != 'genres' && table != 'edits' && table != 'articles' %>
 				<!-- <input class="button-primary" type="submit" value="<%= table %>"> -->
 				<select name="Categories">
-					<option value="@<%=x%>"><%=x.capitalize%></option>
+					<option value="@<%= table %>"><%=table.capitalize%></option>
 				</select>
 			<% end %>
 		<% end %>
