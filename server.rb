@@ -70,12 +70,12 @@ module IowaMusic
   	end
 
   	post "/create_entry" do
-    	b_name = params["name"]
-    	b_img_url = params["img_url"]
-    	b_genre_one = params["genre_one"]
-    	b_location = params["location"]
-    	b_description = params["description"]
-    	b_website_url = params["website_url"]
+    	b_name = params["b_name"]
+    	b_img_url = params["b_img_url"]
+    	b_genre_one = params["b_genre_one"]
+    	b_location = params["b_location"]
+    	b_description = params["b_description"]
+    	b_website_url = params["b_website_url"]
       category = params["category"]
       v_name = params["v_name"]
       v_img_url = params["v_img_url"]
