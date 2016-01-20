@@ -76,14 +76,14 @@ module IowaMusic
     	location = params["location"]
     	description = params["description"]
     	website_url = params["website_url"]
-      @category = params["category"]
+      category = params["category"]
       # name = params["venue_name"]
       # img_url = params["venue_img_url"]
       # location = params["venue_location"]
       # description = params["venue_description"]
       # website_url = params["venue_website_url"]
     	
-    	if @category == 'bands'
+    	if category == 'bands'
       	conn.exec_params(
       		"INSERT INTO bands (name, img_url, genre_one, location, description, website_url) 
       		VALUES ($1, $2, $3, $4, $5, $6)",
