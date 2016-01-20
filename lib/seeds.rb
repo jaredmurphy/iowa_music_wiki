@@ -55,4 +55,113 @@ conn.exec("INSERT INTO bands (name, img_url, genre_one, location, description, w
 	)"
 )
 
+conn.exec("DROP TABLE IF EXISTS albums")
 
+conn.exec("CREATE TABLE albums(
+	 id      SERIAL PRIMARY KEY,
+	 name    VARCHAR(50),
+	 band VARCHAR,
+	 img_url VARCHAR,
+	 location VARCHAR,
+	 songs VARCHAR[],
+	 listen_url VARCHAR,
+	 description VARCHAR
+	 )"
+)
+
+conn.exec("DROP TABLE IF EXISTS songs")
+
+conn.exec("CREATE TABLE songs(
+	 id      SERIAL PRIMARY KEY,
+	 name    VARCHAR(50),
+	 img_url VARCHAR,
+	 band VARCHAR,
+	 album VARCHAR,
+	 lyrics TEXT,
+	 description VARCHAR
+	 )"
+)
+
+conn.exec("DROP TABLE IF EXISTS labels")
+
+conn.exec("CREATE TABLE labels(
+	 id      SERIAL PRIMARY KEY,
+	 name    VARCHAR(50),
+	 img_url VARCHAR,
+	 bands VARCHAR,
+	 albums VARCHAR,
+	 location VARCHAR,
+	 website_url
+	 description VARCHAR
+	 )"
+)
+
+conn.exec("DROP TABLE IF EXISTS venues")
+
+conn.exec("CREATE TABLE venues(
+	 id      SERIAL PRIMARY KEY,
+	 name    VARCHAR(50) UNIQUE,
+	 img_url VARCHAR,
+	 location VARCHAR,
+	 description VARCHAR,
+	 address VARCHAR,
+	 website_url VARCHAR
+	)"
+)
+
+conn.exec("DROP TABLE IF EXISTS genres")
+
+conn.exec("CREATE TABLE genres(
+	 id      SERIAL PRIMARY KEY,
+	 name    VARCHAR(50) UNIQUE,
+	 description VARCHAR,
+	)"
+)
+
+conn.exec("DROP TABLE IF EXISTS festivals")
+
+conn.exec("CREATE TABLE festivals(
+	 id      SERIAL PRIMARY KEY,
+	 name    VARCHAR(50) UNIQUE,
+	 img_url VARCHAR NOT NULL,
+	 location VARCHAR NOT NULL,
+	 description VARCHAR NOT NULL,
+	 website_url VARCHAR NOT NULL
+	)"
+)
+
+conn.exec("DROP TABLE IF EXISTS studios")
+
+conn.exec("CREATE TABLE studios(
+	 id      SERIAL PRIMARY KEY,
+	 name    VARCHAR(50) UNIQUE,
+	 img_url VARCHAR,
+	 location VARCHAR,
+	 description VARCHAR,
+	 website_url VARCHAR
+	)"
+)
+
+conn.exec("DROP TABLE IF EXISTS record_stores")
+
+conn.exec("CREATE TABLE record_stores(
+	 id      SERIAL PRIMARY KEY,
+	 name    VARCHAR(50) UNIQUE,
+	 img_url VARCHAR,
+	 location VARCHAR,
+	 description VARCHAR,
+	 website_url VARCHAR,
+	 address VARCHAR
+	)"
+)
+
+conn.exec("DROP TABLE IF EXISTS edits")
+
+conn.exec("CREATE TABLE edits(
+	 id      SERIAL PRIMARY KEY,
+	 name    VARCHAR(50) UNIQUE,
+	 date TIMESTAMP,
+	 author VARCHAR,
+	 description VARCHAR
+	)"
+)
