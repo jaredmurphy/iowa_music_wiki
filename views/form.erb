@@ -8,7 +8,7 @@
 	
 		<% @data.each do |x| %>
 			<% table = "#{x['table_name']}" %>
-			<% if table == 'genres' %>
+			<% if table == 'genres' || table == 'edits'%>
 				<!-- Do Nothing -->
 			<% elsif table != 'genres' %>
 				<input class="button-primary" type="submit" value="<%= table %>">
