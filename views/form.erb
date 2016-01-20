@@ -6,8 +6,8 @@
 	<form class="create_entry" action="/create_entry" method="post">
 		<p>In order to create submit an entry please choose one of the following categories</p>
 	
-		<select type='text' value='<%= category %>'name="Categories">
-		<input  type="text" name="category" required/>
+		<select type='text' value='<%= category %>'name="category">
+		
 		<% @data.each do |x| %>
 			<% table = "#{x['table_name']}" %>
 			<% if table == 'genres' || table == 'edits' || table == 'articles' || table == 'authors' %>
