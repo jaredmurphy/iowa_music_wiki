@@ -2,6 +2,11 @@
 
 <div id="list_content"  class="eight columns">
 
+
+      	<% if @entry_submitted %>
+		<p> Thank you!</p>
+	<% else %>
+
 			<form class="create_entry" action="/create_entry/albums" method="post">
 				
 
@@ -37,5 +42,5 @@
 		
 
 	</form>
-
+	<% end %>
 </div>
