@@ -7,14 +7,15 @@
 		<p>In order to create submit an entry please choose one of the following categories</p>
 	
 		<select name="Categories">
+		<input  type="text" name="category" required/>
 		<% @data.each do |x| %>
 			<% table = "#{x['table_name']}" %>
-			<% if table == 'genres' || table == 'edits' || table == 'articles'%>
+			<% if table == 'genres' || table == 'edits' || table == 'articles' || table == 'authors' %>
 				<!-- Do Nothing -->
-			<% elsif table != 'genres' && table != 'edits' && table != 'articles' %>
+			<% elsif table != 'genres' && table != 'edits' && table != 'articles' && table != 'authors' %>
 				<!-- <input class="button-primary" type="submit" value="<%= table %>"> -->
 				
-					<option value="@<%= table %>"><%=table.capitalize%></option>
+					<option value="<%= category %>"><%=table.capitalize%></option>
 				
 			<% end %>
 		<% end %>
