@@ -76,7 +76,7 @@ module IowaMusic
     	b_location = params["location"]
     	b_description = params["description"]
     	b_website_url = params["website_url"]
-      b_category = params["category"]
+      category = params["category"]
       v_name = params["v_name"]
       v_img_url = params["v_img_url"]
       v_location = params["v_location"]
