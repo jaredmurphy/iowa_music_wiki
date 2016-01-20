@@ -165,3 +165,12 @@ conn.exec("CREATE TABLE edits(
 	 description VARCHAR
 	)"
 )
+
+conn.exec("DROP TABLE IF EXISTS articles")
+
+conn.exec("CREATE TABLE articles(
+	id SERIAL PRIMARY KEY,
+	category VARCHAR,
+	author VARCHAR,
+	)"
+)
