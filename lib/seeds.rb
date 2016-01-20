@@ -91,7 +91,7 @@ conn.exec("CREATE TABLE labels(
 	 bands VARCHAR,
 	 albums VARCHAR,
 	 location VARCHAR,
-	 website_url,
+	 website_url VARCHAR,
 	 description VARCHAR
 	 )"
 )
