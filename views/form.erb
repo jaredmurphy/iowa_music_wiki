@@ -10,7 +10,7 @@
 			<% table = "#{x['table_name']}" %>
 			<% if table == 'genres' || table == 'edits'%>
 				<!-- Do Nothing -->
-			<% elsif table != 'genres' %>
+			<% elsif table != 'genres' && table != 'edits' %>
 				<input class="button-primary" type="submit" value="<%= table %>">
 			<% end %>
 		<% end %>
