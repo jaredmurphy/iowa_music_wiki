@@ -17,11 +17,11 @@ conn.exec("DROP TABLE IF EXISTS bands");
 conn.exec("CREATE TABLE bands(
    id      SERIAL PRIMARY KEY,
    name    VARCHAR(50) UNIQUE,
-   img_url VARCHAR NOT NULL,
-   genre_one VARCHAR NOT NULL,
-   location VARCHAR NOT NULL,
-   description VARCHAR NOT NULL,
-   website_url VARCHAR NOT NULL
+   img_url VARCHAR,
+   genre_one VARCHAR,
+   location VARCHAR,
+   description VARCHAR,
+   website_url VARCHAR
   )"
 )
 

@@ -77,11 +77,11 @@ module IowaMusic
     	description = params["description"]
     	website_url = params["website_url"]
 
-      name = params["venue_name"]
-      img_url = params["venue_img_url"]
-      location = params["venue_location"]
-      description = params["venue_description"]
-      website_url = params["venue_website_url"]
+      # name = params["venue_name"]
+      # img_url = params["venue_img_url"]
+      # location = params["venue_location"]
+      # description = params["venue_description"]
+      # website_url = params["venue_website_url"]
     	
     	
     	conn.exec_params(
