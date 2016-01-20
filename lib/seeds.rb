@@ -22,6 +22,7 @@ conn.exec("CREATE TABLE albums(
 	 )"
 )
 
+conn.exec("DROP TABLE IF EXISTS articles")
 conn.exec("CREATE TABLE articles(
 	id SERIAL PRIMARY KEY,
 	category VARCHAR,
@@ -29,6 +30,7 @@ conn.exec("CREATE TABLE articles(
 	)"
 )
 
+conn.exec("DROP TABLE IF EXISTS bands")
 conn.exec("CREATE TABLE bands(
    id      SERIAL PRIMARY KEY,
    name    VARCHAR(50) UNIQUE,
@@ -70,6 +72,7 @@ conn.exec("CREATE TABLE bands(
 		)"
 	)
 
+conn.exec("DROP TABLE IF EXISTS edits")
 conn.exec("CREATE TABLE edits(
 	 id      SERIAL PRIMARY KEY,
 	 name    VARCHAR(50) UNIQUE,
@@ -79,6 +82,7 @@ conn.exec("CREATE TABLE edits(
 	)"
 )
 
+conn.exec("DROP TABLE IF EXISTS festivals")
 conn.exec("CREATE TABLE festivals(
 	 id      SERIAL PRIMARY KEY,
 	 name    VARCHAR(50) UNIQUE,
@@ -89,6 +93,7 @@ conn.exec("CREATE TABLE festivals(
 	)"
 )
 
+conn.exec("DROP TABLE IF EXISTS genres")
 conn.exec("CREATE TABLE genres(
 	 id      SERIAL PRIMARY KEY,
 	 name    VARCHAR(50) UNIQUE,
@@ -96,6 +101,7 @@ conn.exec("CREATE TABLE genres(
 	)"
 )
 
+conn.exec("DROP TABLE IF EXISTS labels")
 conn.exec("CREATE TABLE labels(
 	 id      SERIAL PRIMARY KEY,
 	 name    VARCHAR(50),
@@ -108,6 +114,7 @@ conn.exec("CREATE TABLE labels(
 	 )"
 )
 
+conn.exec("DROP TABLE IF EXISTS record_stores")
 conn.exec("CREATE TABLE record_stores(
 	 id      SERIAL PRIMARY KEY,
 	 name    VARCHAR(50) UNIQUE,
@@ -118,6 +125,7 @@ conn.exec("CREATE TABLE record_stores(
 	)"
 )
 
+conn.exec("DROP TABLE IF EXISTS songs")
 conn.exec("CREATE TABLE songs(
 	 id      SERIAL PRIMARY KEY,
 	 name    VARCHAR(50),
@@ -128,6 +136,7 @@ conn.exec("CREATE TABLE songs(
 	 )"
 )
 
+conn.exec("DROP TABLE IF EXISTS studios")
 conn.exec("CREATE TABLE studios(
 	 id      SERIAL PRIMARY KEY,
 	 name    VARCHAR(50) UNIQUE,
@@ -138,6 +147,7 @@ conn.exec("CREATE TABLE studios(
 	)"
 )
 
+conn.exec("DROP TABLE IF EXISTS venues")
 conn.exec("CREATE TABLE venues(
 	 id      SERIAL PRIMARY KEY,
 	 name    VARCHAR(50) UNIQUE,
