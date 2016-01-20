@@ -11,6 +11,7 @@ else
   conn = PG.connect(dbname: "iowa_music_wiki_db")
 end
 
+conn.exec("DROP TABLE IF EXISTS albums")
 conn.exec("CREATE TABLE albums(
 	 id      SERIAL PRIMARY KEY,
 	 name    VARCHAR(50),
