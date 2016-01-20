@@ -8,9 +8,9 @@
 	
 		<% @data.each do |x| %>
 			<% table = "#{x['table_name']}" %>
-			<% if table == 'genres' || table == 'edits'%>
+			<% if table == 'genres' || table == 'edits' || table == 'articles'%>
 				<!-- Do Nothing -->
-			<% elsif table != 'genres' && table != 'edits' %>
+			<% elsif table != 'genres' && table != 'edits' && table != 'articles' %>
 				<input class="button-primary" type="submit" value="<%= table %>">
 			<% end %>
 		<% end %>

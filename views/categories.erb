@@ -4,9 +4,9 @@
 	<div id="categories" class="seven columns">
 	<% @data.each do |x| %>
 		<% table = "#{x['table_name']}" %>
-			<% if table == 'genres' || table == 'edits'%>
+			<% if table == 'genres' || table == 'edits' || table == 'articles'%>
 				<!-- Do Nothing -->
-			<% elsif table != 'genres' && table != 'edits' %>
+			<% elsif table != 'genres' && table != 'edits' && table != 'articles' %>
 			<a href="/<%= table %>"><input class="button-primary" type="submit" value="<%= table.capitalize %>"></a>
 		<% end %>
 
