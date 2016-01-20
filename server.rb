@@ -8,6 +8,13 @@ module IowaMusic
   		erb :home
   	end
   	# this will list all bands
+     get '/albums' do
+      @title = "albums"
+      
+      @data = conn.exec("
+        SELECT * FROM #{@title}").to_a
+      erb :lists
+    end
   	get '/bands' do
   		@title = "bands"
   		
@@ -54,6 +61,7 @@ module IowaMusic
   			SELECT * FROM #{@title} WHERE id = #{@id};").to_a
   		erb :article
   	end
+
   	get '/categories' do
   		@title = "categories"
   		@categories = entries.map { |a| a.to_s }
@@ -128,7 +136,7 @@ module IowaMusic
       v_website_url = params["v_website_url"]
     	
       if category == 'Albums'
-        "INSERT INTO albums (name, band, img_url, listen_url, description) 
+        conn.exec_params("INSERT INTO albums (name, band, img_url, listen_url, description) 
           VALUES ($1, $2, $3, $4, $5)",
           [a_name, a_band, a_img_url, a_listen_url, a_description]
         )
