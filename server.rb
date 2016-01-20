@@ -94,7 +94,7 @@ module IowaMusic
         conn.exec_params(
           "INSERT INTO venues (v_name, v_img_url, v_location, v_description, v_website_url) 
           VALUES ($1, $2, $3, $4, $5)",
-          [name, img_url, location, description, website_url]
+          [v_name, v_img_url, v_location, v_description, v_website_url]
         )
       end
       # conn.exec_params(
