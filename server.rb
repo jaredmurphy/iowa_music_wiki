@@ -76,13 +76,24 @@ module IowaMusic
     	location = params["location"]
     	description = params["description"]
     	website_url = params["website_url"]
+
+      name = params["venue_name"]
+      img_url = params["venue_img_url"]
+      location = params["venue_location"]
+      description = params["venue_description"]
+      website_url = params["venue_website_url"]
     	
     	
-    	conn.exec_params(
-    		"INSERT INTO bands (name, img_url, genre_one, location, description, website_url) 
-    		VALUES ($1, $2, $3, $4, $5, $6)",
-    		[name, img_url, genre_one, location, description, website_url]
-    	)
+    	# conn.exec_params(
+    	# 	"INSERT INTO bands (name, img_url, genre_one, location, description, website_url) 
+    	# 	VALUES ($1, $2, $3, $4, $5, $6)",
+    	# 	[name, img_url, genre_one, location, description, website_url]
+    	# )
+      conn.exec_params(
+        "INSERT INTO venues (name, img_url, location, description, website_url) 
+        VALUES ($1, $2, $3, $4, $5)",
+        [name, img_url, location, description, website_url]
+      )
 
     	@entry_submitted = true
     	erb :form
