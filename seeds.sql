@@ -15,7 +15,7 @@ end
 
 CREATE TABLE bands(
  id      SERIAL PRIMARY KEY,
- name    VARCHAR UNIQUE,
+ name    VARCHAR,
  img_url VARCHAR NOT NULL,
  genre_one VARCHAR NOT NULL,
  location VARCHAR NOT NULL,
