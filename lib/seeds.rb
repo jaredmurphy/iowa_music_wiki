@@ -31,8 +31,8 @@ conn.exec("INSERT INTO bands (name, img_url, genre_one, location, description, w
       'rock', 
       'Des Moines', 
       'Mighty Shady was awesome', 
-      'https://www.facebook.com/mightyshadymusic/')
-)"
+      'https://www.facebook.com/mightyshadymusic/'
+	  )"
 )
 
 conn.exec("INSERT INTO bands (name, img_url, genre_one, location, description, website_url) VALUES (
@@ -42,7 +42,7 @@ conn.exec("INSERT INTO bands (name, img_url, genre_one, location, description, w
     'Davenport', 
     'Fire Sale was awesome', 
     'https://www.facebook.com/firesaleband/'
-)"
+	)"
 )
 
 conn.exec("INSERT INTO bands (name, img_url, genre_one, location, description, website_url) VALUES (
@@ -52,8 +52,7 @@ conn.exec("INSERT INTO bands (name, img_url, genre_one, location, description, w
     'Davenport', 
     'Ridiculicious', 
     'http://www.thecandymakers.com/'
-)"
+	)"
 )
 
 
-conn.exec("DROP TABLE IF EXISTS albums")
