@@ -1,25 +1,18 @@
 <div id="form" class="eight columns">
 	<h4>Create an Entry</h4>
 	<% if @entry_submitted %>
-	<p> Thank you!</p>
+		<p> Thank you!</p>
 	<% else %>
 	<form class="create_entry" action="/create_entry" method="post">
 		<p>In order to create submit an entry please choose one of the following categories</p>
-	
-		<select type='text' value='category'name="category">
-		
-		<% @data.each do |x| %>
-			<% table = "#{x['table_name']}" %>
-			<% if table == 'genres' || table == 'edits' || table == 'articles' || table == 'authors' %>
-				<!-- Do Nothing -->
-			<% elsif table != 'genres' && table != 'edits' && table != 'articles' && table != 'authors' %>
-					<option ><%=table.capitalize%></option>
+		<select type='text' value='category' name="category">
+		    <% @categories.each do |category| %>
+				<option ><%= category.capitalize %></option>
 			<% end %>
-		<% end %>
-		</select>
+	</select>
 		<!-- for bands -->
 
-		
+
 		<div class="input-row">
 			<label for="b_name">Band Name: </label>
 			<input  type="text" name="b_name" />

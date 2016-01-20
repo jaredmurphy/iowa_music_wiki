@@ -1,6 +1,8 @@
 module IowaMusic
   class Server < Sinatra::Base
 
+    entries = [:bands, :venues, :albums, :festivals, :songs, :labels, :record_stores, :studios]
+
   	get '/' do
   		
   		erb :home
@@ -54,9 +56,7 @@ module IowaMusic
   	end
   	get '/categories' do
   		@title = "categories"
-  		
-  		@data = conn.exec("
-  			SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';")
+  		@categories = entries.map { |a| a.to_s }
   		erb :categories
   	end
 
@@ -64,19 +64,23 @@ module IowaMusic
   		@title = "create entry"
   		
   		@genres = conn.exec("SELECT * FROM genres;")
-  		@data = conn.exec("
-			SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';")
+  		@categories = entries.map { |a| a.to_s }
+
   		erb :form
   	end
+    
 
+    # CREATE POST
   	post "/create_entry" do
+      category = params["category"]
+
     	b_name = params["b_name"]
     	b_img_url = params["b_img_url"]
     	b_genre_one = params["b_genre_one"]
     	b_location = params["b_location"]
     	b_description = params["b_description"]
     	b_website_url = params["b_website_url"]
-      category = params["category"]
+      
       v_name = params["v_name"]
       v_img_url = params["v_img_url"]
       v_location = params["v_location"]
@@ -89,7 +93,6 @@ module IowaMusic
       		VALUES ($1, $2, $3, $4, $5, $6)",
       		[b_name, b_img_url, b_genre_one, b_location, b_description, b_website_url]
       	)
-      
         elsif category == 'Venues'
         conn.exec_params(
           "INSERT INTO venues (name, img_url, location, description, website_url) 
@@ -97,15 +100,12 @@ module IowaMusic
           [v_name, v_img_url, v_location, v_description, v_website_url]
         )
       end
-      # conn.exec_params(
-      #   "INSERT INTO venues (name, img_url, location, description, website_url) 
-      #   VALUES ($1, $2, $3, $4, $5)",
-      #   [name, img_url, location, description, website_url]
-      # )
 
     	@entry_submitted = true
     	erb :form
     end
+
+    # end create post
 
     get '/random' do
   		@data = conn.exec("
