@@ -9,12 +9,13 @@ if ENV["RACK_ENV"] == 'production'
     user: ENV["POSTGRES_USER"]
   )
 else
-  conn = PG.connect(dbname: "iowa_music_wiki")
+  conn = PG.connect(dbname: "iowa_music_wiki_db")
 end
+
 
 CREATE TABLE bands(
  id      SERIAL PRIMARY KEY,
- name    VARCHAR,
+ name    VARCHAR UNIQUE,
  img_url VARCHAR,
  genre_one VARCHAR,
  location VARCHAR,

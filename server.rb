@@ -2,13 +2,13 @@ module IowaMusic
   class Server < Sinatra::Base
 
   	get '/' do
-  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		
   		erb :home
   	end
   	# this will list all bands
   	get '/bands' do
   		@title = "bands"
-  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		
   		@data = conn.exec("
   			SELECT * FROM #{@title};").to_a
   		erb :lists
@@ -17,14 +17,14 @@ module IowaMusic
   	get '/bands/:id' do
   		@id = params[:id]
   		 @title = "bands"
-  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		
   		@data = conn.exec("
   			SELECT * FROM #{@title} WHERE id = #{@id};").to_a
   		erb :article
   	end
   	get '/labels' do
   		@title = "labels"
-  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		
   		@data = conn.exec("
   			SELECT * FROM #{@title}").to_a
   		erb :lists
@@ -32,14 +32,14 @@ module IowaMusic
   	 get '/labels/:id' do
   		@id = params[:id]
   		 @title = "labels"
-  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		
   		@data = conn.exec("
   			SELECT * FROM #{@title} WHERE id = #{@id};").to_a
   		erb :article
   	end
   	get '/venues' do
   		@title = "venues"
-  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		
   		@data = conn.exec("
   			SELECT * FROM #{@title}").to_a
   		erb :lists
@@ -47,14 +47,14 @@ module IowaMusic
   	get '/venues/:id' do
   		@id = params[:id]
   		 @title = "venues"
-  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		
   		@data = conn.exec("
   			SELECT * FROM #{@title} WHERE id = #{@id};").to_a
   		erb :article
   	end
   	get '/categories' do
   		@title = "categories"
-  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		
   		@data = conn.exec("
   			SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';")
   		erb :categories
@@ -62,7 +62,7 @@ module IowaMusic
 
   	get '/create_entry' do
   		@title = "create entry"
-  		conn = PG.connect(dbname: "iowa_music_wiki_db")
+  		
   		@genres = conn.exec("SELECT * FROM genres;")
   		@data = conn.exec("
 			SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';")
@@ -77,7 +77,7 @@ module IowaMusic
     	description = params["description"]
     	website_url = params["website_url"]
     	
-    	conn = PG.connect(dbname: "iowa_music_wiki_db")
+    	
     	conn.exec_params(
     		"INSERT INTO bands (name, img_url, genre_one, location, description, website_url) 
     		VALUES ($1, $2, $3, $4, $5, $6)",
@@ -94,6 +94,21 @@ module IowaMusic
   		erb :random
   	end
 
+
+    private
+
+    def conn
+        if ENV["RACK_ENV"] == 'production'
+           PG.connect(
+            dbname: ENV["POSTGRES_DB"],
+            host: ENV["POSTGRES_HOST"],
+            password: ENV["POSTGRES_PASS"],
+            user: ENV["POSTGRES_USER"]
+        )
+        else
+            PG.connect(dbname: "iowa_music_wiki_db")
+        end
+    end
 end
 
 end
