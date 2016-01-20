@@ -4,69 +4,31 @@
 		<p> Thank you!</p>
 	<% else %>
 	<form class="create_entry" action="/create_entry" method="post">
+
 		<p>In order to create submit an entry please choose one of the following categories</p>
 		<select type='text' value='category' name="category">
 		    <% @categories.each do |category| %>
 				<option ><%= category.capitalize %></option>
 			<% end %>
-	</select>
-		<!-- for bands -->
+		</select>
+	</form>
+
+	<form class="create_entry" action="/create_entry" method="post">
+		<%= erb :albums %>
+		<%= erb :bands %>
+		<%= erb :festivals %>
+		<%= erb :labels %>
+		<%= erb :record_stores %>
+		<%= erb :songs %>
+		<%= erb :studios %>
+		<%= erb :venues %>
 
 
-		<div class="input-row">
-			<label for="b_name">Band Name: </label>
-			<input  type="text" name="b_name" />
-		</div>
-		<div class="input-row">
-			<label for="b_location">City: </label>
-			<input  type="text" name="b_location" />
-		</div>
-		<div class="input-row">
-			<label for="b_genre_one">Genre: </label>
-			<input  type="text" name="b_genre_one" />
-		</div>
-		<div class="input-row">
-			<label for="b_img_url">Image URL: </label>
-			<input class="u-full-width" type="text" name="b_img_url" />
-		</div>
-		<div class="input-row">
-			<label for="b_website_url">Website URL: </label>
-			<input class="u-full-width" type="text" name="b_website_url"/>
-		</div>
-		<div class="input-row">
-			<label for="b_description">Description: </label>
-			<textarea class="u-full-width" name="b_description"></textarea>
-		</div>
-		<div class="input-row">
-			<input class="button-primary" type="submit" value="Submit"/>
-		</div>
+	</form>
 		
-		<!-- end bands -->
-		<!-- for venues -->
-		<div class="input-row">
-			<label for="v_name">Venue Name: </label>
-			<input  type="text" name="v_name" required/>
-		</div>
-		<div class="input-row">
-			<label for="v_location">City: </label>
-			<input  type="text" name="v_location" />
-		</div>
-		<div class="input-row">
-			<label for="v_img_url">Image URL: </label>
-			<input class="u-full-width" type="text" name="v_img_url" />
-		</div>
-		<div class="input-row">
-			<label for="v_website_url">Website URL: </label>
-			<input class="u-full-width" type="text" name="v_website_url"/>
-		</div>
-		<div class="input-row">
-			<label for="v_description">Description: </label>
-			<textarea class="u-full-width" name="v_description"></textarea>
-		</div>
-		<div class="input-row">
-			<input class="button-primary" type="submit" value="Submit"/>
-		</div>
-		<!-- end venues -->
+
+			
+		
 	</form>
 	<% end %>
 </div>	

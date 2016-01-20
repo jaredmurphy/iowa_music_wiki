@@ -16,8 +16,6 @@ conn.exec("CREATE TABLE albums(
 	 name    VARCHAR(50),
 	 band VARCHAR,
 	 img_url VARCHAR,
-	 location VARCHAR,
-	 songs VARCHAR[],
 	 listen_url VARCHAR,
 	 description VARCHAR
 	 )"
@@ -115,15 +113,13 @@ conn.exec("CREATE TABLE record_stores(
 	 img_url VARCHAR,
 	 location VARCHAR,
 	 description VARCHAR,
-	 website_url VARCHAR,
-	 address VARCHAR
+	 website_url VARCHAR
 	)"
 )
 
 conn.exec("CREATE TABLE songs(
 	 id      SERIAL PRIMARY KEY,
 	 name    VARCHAR(50),
-	 img_url VARCHAR,
 	 band VARCHAR,
 	 album VARCHAR,
 	 lyrics TEXT,
