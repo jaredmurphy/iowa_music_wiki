@@ -92,7 +92,7 @@ module IowaMusic
       
         elsif category == 'Venues'
         conn.exec_params(
-          "INSERT INTO venues (v_name, v_img_url, v_location, v_description, v_website_url) 
+          "INSERT INTO venues (name, img_url, location, description, website_url) 
           VALUES ($1, $2, $3, $4, $5)",
           [v_name, v_img_url, v_location, v_description, v_website_url]
         )
