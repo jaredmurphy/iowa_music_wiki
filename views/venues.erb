@@ -1,3 +1,12 @@
+<div id="list_content"  class="eight columns">
+
+
+      	<% if @entry_submitted %>
+		<p> Thank you!</p>
+	<% else %>
+
+			<form class="create_entry" action="/create_entry/venues" method="post">
+
 <div class="input-row">
 			<label for="v_name">Venue Name: </label>
 			<input  type="text" name="v_name"/>
@@ -20,4 +29,8 @@
 		</div>
 		<div class="input-row">
 			<input class="button-primary" type="submit" value="Submit"/>
+</div>
+
+			</form>
+	<% end %>
 </div>

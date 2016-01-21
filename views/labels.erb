@@ -1,3 +1,12 @@
+<div id="list_content"  class="eight columns">
+
+
+      	<% if @entry_submitted %>
+		<p> Thank you!</p>
+	<% else %>
+
+			<form class="create_entry" action="/create_entry/labels" method="post">
+				
 
 		<div class="input-row">
 			<label for="l_name">Label Name: </label>
@@ -23,3 +32,7 @@
 			<input class="button-primary" type="submit" value="Submit"/>
 		</div>
 		
+			</form>
+	<% end %>
+</div>
+

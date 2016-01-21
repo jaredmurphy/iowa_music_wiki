@@ -1,3 +1,18 @@
+			
+
+<div id="list_content"  class="eight columns">
+
+
+      	<% if @entry_submitted %>
+		<p> Thank you!</p>
+	<% else %>
+
+			<form class="create_entry" action="/create_entry/bands" method="post">
+				
+
+
+
+
 		<div class="input-row">
 			<label for="b_name">Band Name: </label>
 			<input  type="text" name="b_name" />
@@ -26,3 +41,7 @@
 			<input class="button-primary" type="submit" value="Submit"/>
 		</div>
 		
+			</form>
+	<% end %>
+</div>
+

@@ -1,4 +1,14 @@
+			
 
+<div id="list_content"  class="eight columns">
+
+
+      	<% if @entry_submitted %>
+		<p> Thank you!</p>
+	<% else %>
+
+			<form class="create_entry" action="/create_entry/festivals" method="post">
+				
 		<div class="input-row">
 			<label for="f_name">Festival Name: </label>
 			<input  type="text" name="f_name" />
@@ -24,4 +34,8 @@
 		</div>
 		
 
+
+			</form>
+	<% end %>
+</div>
 
