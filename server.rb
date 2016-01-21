@@ -1,7 +1,9 @@
 module IowaMusic
   class Server < Sinatra::Base
 
+    enable :sessions
     entries = [:albums, :bands, :festivals, :labels, :record_stores, :songs, :studios, :venues]
+
 
     get '/' do
       erb :home
@@ -62,7 +64,6 @@ module IowaMusic
       erb :article
     end
     ### end festivals ###
-
 
     ### labels ###
   	get '/labels' do
@@ -154,7 +155,36 @@ module IowaMusic
   		erb :categories
   	end
 
+    #######################
+    ######## other ########
+    #######################
+    get '/signup' do 
+      erb :signup
+    end
 
+    post '/signup' do
+      username = params['username']
+
+      encrypted_password = BCrypt::Password.create(params['password'])
+
+     conn.exec_params("INSERT INTO authors (username, password_digest) VALUES ($1, $2)",
+        [username, encrypted_password]
+      )
+
+      erb :signupsuccess
+    end
+
+
+    get '/login' do
+
+    end
+
+    get '/random' do
+      @pick = 
+      @data = conn.exec("
+      SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';")
+      erb :random
+    end
 
     #######################
     ### create articles ###
@@ -336,11 +366,7 @@ module IowaMusic
     ### end create venues ###
 
 
-    get '/random' do
-  		@data = conn.exec("
-			SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';")
-  		erb :random
-  	end
+
 
 
     private

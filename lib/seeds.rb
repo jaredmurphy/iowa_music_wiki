@@ -30,6 +30,14 @@ conn.exec("CREATE TABLE articles(
 	)"
 )
 
+conn.exec("DROP TABLE IF EXISTS authors")
+conn.exec("CREATE TABLE authors(
+	id SERIAL PRIMARY KEY,
+	username VARCHAR UNIQUE,
+	password_digest VARCHAR
+	)"
+)
+
 conn.exec("DROP TABLE IF EXISTS bands")
 conn.exec("CREATE TABLE bands(
    id      SERIAL PRIMARY KEY,
