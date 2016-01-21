@@ -1,7 +1,7 @@
 module IowaMusic
   class Server < Sinatra::Base
 
-    entries = [:bands, :venues, :albums, :festivals, :songs, :labels, :record_stores, :studios]
+    entries = [:albums, :bands, :festivals, :labels, :record_stores, :songs, :studios, :venues]
 
     get '/' do
       erb :home
