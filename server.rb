@@ -4,6 +4,14 @@ module IowaMusic
     enable :sessions
     entries = [:albums, :bands, :festivals, :labels, :record_stores, :songs, :studios, :venues]
 
+    def current_user
+        if session["author_id"]
+          @author ||= conn.exec_params("SELECT * FROM authors WHERE id = $1", [session["author_id"]]).first
+        else 
+          {}
+          #user is not logged in
+        end
+    end
 
     get '/' do
       erb :home
@@ -176,7 +184,24 @@ module IowaMusic
 
 
     get '/login' do
+        erb :login
+    end
 
+    post "/login" do
+
+      @author = conn.exec_params("SELECT * FROM authors WHERE username = $1", [params['username']]).first
+      if @author
+        if BCrypt::Password.new(@author['password_digest']) == params['password']
+          session["author_id"] = @author["id"]
+          redirect "/"
+        else 
+          @error = "Invalid Password"
+          erb :login
+        end
+      else 
+        @error = "Invalid Username"
+        erb :login
+      end
     end
 
     get '/random' do
