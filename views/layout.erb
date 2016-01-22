@@ -2,22 +2,32 @@
 <html>
 <head>
 	<title>Iowa Music Wiki</title>
+	<link rel="stylesheet" href="/css/styles.css">
+	<link rel="stylesheet" href="/css/normalize.css">
+	<link rel="stylesheet" href="/css/skeleton.css">
 </head>
 <body>
 <header>
 
-<p class = 'four columns' style = 'display inline'>Logged in as <%= current_user['username'] %> </p>
+<div class = 'four columns' style = 'display inline'>
+	<% if session['author_id'] %>
+		<p>Hi <%= current_user['username'] %> </p>
+		<a style = 'display inline' href='/logout'>Log out</a>
+	<% else %>
+		<a href='/login'>Login</a> 
+		<br>
+		<a href='/signup'>Sign up</a>
+	<% end %>
+</div>
 <h1 class = 'four columns' class = 'three columns' style = 'display inline'>Iowa Music Wiki</h1>
 <p class = 'four columns' style = 'display inline'></p>
 
 
-	<link rel="stylesheet" href="/css/styles.css">
-	<link rel="stylesheet" href="/css/normalize.css">
-	<link rel="stylesheet" href="/css/skeleton.css">
+
 </header>
 
 
-<nav >
+<nav>
 	<div id="menu" class="three columns">
 		<ul>
 			<a href="/"><li>Home</li></a>

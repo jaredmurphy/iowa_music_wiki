@@ -1,0 +1,44 @@
+<div id="list_content"  class="eight columns">
+	<% if @entry_submitted == true %>
+	 <h1> Thanks! </h1>
+	 <a href="/<%= @table %>/<%= @id %>"><h3> See your changes here</h3></a>
+	<% else %>
+		<% if session['author_id'] %>
+			<% @author = session['author_id'] %>
+			<%= @author %>
+			<h1> <%= @data[0]['name'] %> </h1>
+			<p><%=@data[0]['id']%>
+			<form class="create_entry" action="/bands/<%=@data[0]['id']%>/edit" method="post">
+				<input type="hidden" name="author" value="<%=@author%>"/>		
+				<div class="input-row">
+					<label for="location">City: </label>
+					<input  value ="<%= @data[0]['location'] %>" type="text" name="location" />
+				</div>
+				<div class="input-row">
+					<label for="genre_one">Genre: </label>
+					<input  value ="<%= @data[0]['genre_one'].capitalize %>" type="text" name="genre_one" />
+				</div>
+				<div class="input-row">
+					<label for="img_url">Image URL: </label>
+		
+					<input value="<%= @data[0]['img_url'] %>" class="u-full-width" type="text" name="img_url" />
+				</div>
+				<div class="input-row">
+					<label for="website_url">Website URL: </label>
+					<input value="<%= @data[0]['website_url'] %>" class="u-full-width" type="text" name="website_url"/>
+				</div>
+				<div class="input-row">
+					<label for="description">Description: </label>
+					<textarea class="u-full-width" type='text' name="description"><%= @data[0]['description'] %></textarea>
+				</div>
+				<div class="input-row">
+					<input class="button-primary" type="submit" value="Submit"/>
+				</div>
+		
+			</form>
+		<% else %>
+			<h1>Please <a href='/login'>Login</a> or <a href='/signup'> Sign up</a></h1>
+		<% end %>
+	
+<% end %>
+	</div>

@@ -26,15 +26,18 @@ conn.exec("DROP TABLE IF EXISTS articles")
 conn.exec("CREATE TABLE articles(
 	id SERIAL PRIMARY KEY,
 	category VARCHAR,
-	author VARCHAR
+	author_id VARCHAR
+
 	)"
 )
 
 conn.exec("DROP TABLE IF EXISTS authors")
 conn.exec("CREATE TABLE authors(
 	id SERIAL PRIMARY KEY,
-	username VARCHAR UNIQUE,
-	password_digest VARCHAR
+	username VARCHAR NOT NULL UNIQUE,
+	email VARCHAR NOT NULL UNIQUE,
+	password_digest VARCHAR NOT NULL,
+	edit_count INTEGER
 	)"
 )
 
@@ -46,6 +49,7 @@ conn.exec("CREATE TABLE bands(
    genre_one VARCHAR,
    location VARCHAR,
    description VARCHAR,
+   author_id VARCHAR,
    website_url VARCHAR
   )"
 )
@@ -84,7 +88,7 @@ conn.exec("DROP TABLE IF EXISTS edits")
 conn.exec("CREATE TABLE edits(
 	 id      SERIAL PRIMARY KEY,
 	 name    VARCHAR(50) UNIQUE,
-	 date TIMESTAMP,
+	 date TIMESTAMPTZ default current_timestamp,
 	 author VARCHAR,
 	 description VARCHAR
 	)"

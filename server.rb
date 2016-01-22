@@ -4,14 +4,6 @@ module IowaMusic
     enable :sessions
     entries = [:albums, :bands, :festivals, :labels, :record_stores, :songs, :studios, :venues]
 
-    def current_user
-        if session["author_id"]
-          @author ||= conn.exec_params("SELECT * FROM authors WHERE id = $1", [session["author_id"]]).first
-        else 
-          {}
-          #user is not logged in
-        end
-    end
 
     get '/' do
       erb :home
@@ -54,7 +46,39 @@ module IowaMusic
   			SELECT * FROM #{@title} WHERE id = #{@id};").to_a
   		erb :article
   	end
+
+    ### edit ###
+
+    get '/bands/:id/edit' do
+
+      @id = params[:id]
+      @table = "bands"
+      @data = conn.exec("
+      SELECT * FROM #{@table} WHERE id = #{@id}").to_a
+      erb :bands_edit
+    end
+
+    post '/bands/:id/edit' do
+
+   
+      author_id = params['author']
+      name = params["name"]
+      img_url = params["img_url"]
+      genre_one = params["genre_one"]
+      location = params["location"]
+      description = params["description"]
+      website_url = params["website_url"]
+      @id = params[:id]
+      @table = 'bands'
+      @data = conn.exec_params("
+      UPDATE #{@table} SET location = $1, genre_one = $2, img_url = $3, website_url = $4, description = $5, author_id = $6 
+        WHERE id = #{@id} returning *",
+        [location, genre_one, img_url, website_url, description, author_id]).to_a
+      @entry_submitted = true
+      erb :bands_edit
+    end
     ### end bands ###
+
 
     ### festivals ###
     get '/festivals' do
@@ -166,29 +190,37 @@ module IowaMusic
     #######################
     ######## other ########
     #######################
+
+    def current_user
+      if session["author_id"]
+        @author ||= conn.exec_params("SELECT * FROM authors WHERE id = $1", [session["author_id"]]).first
+      else 
+        {}
+        #user is not logged in
+      end
+    end
+
+    ### sign up ###
     get '/signup' do 
       erb :signup
     end
 
     post '/signup' do
       username = params['username']
-
       encrypted_password = BCrypt::Password.create(params['password'])
-
-     conn.exec_params("INSERT INTO authors (username, password_digest) VALUES ($1, $2)",
-        [username, encrypted_password]
+      email = params['email']
+     conn.exec_params("INSERT INTO authors (username, email, password_digest) VALUES ($1, $2, $3)",
+        [username, email, encrypted_password]
       )
-
       erb :signupsuccess
     end
 
-
+    ### log in ###
     get '/login' do
         erb :login
     end
 
     post "/login" do
-
       @author = conn.exec_params("SELECT * FROM authors WHERE username = $1", [params['username']]).first
       if @author
         if BCrypt::Password.new(@author['password_digest']) == params['password']
@@ -204,12 +236,21 @@ module IowaMusic
       end
     end
 
+    ### logout ###
+    get '/logout' do
+      session.delete('author_id')
+      redirect '/'
+    end
+
+    ### random ###
     get '/random' do
       @pick = 
       @data = conn.exec("
       SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';")
       erb :random
     end
+
+
 
     #######################
     ### create articles ###
