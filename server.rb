@@ -41,9 +41,15 @@ module IowaMusic
 
   	get '/bands/:id' do
   		@id = params[:id]
+      markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions = {})
   		 @title = "bands"
-  		 @data = conn.exec("
-  			SELECT * FROM #{@title} WHERE id = #{@id};").to_a
+  		 @data = conn.exec_params("
+  			SELECT * FROM bands WHERE id = $1", [@id]).first
+       #binding.pry
+       #auth_id = @data['author_id'].to_i
+       @author = conn.exec_params("
+        SELECT username FROM authors WHERE id = $1", [@data['author_id'].to_i]).first
+       @description = markdown(@data['description'])
   		erb :article
   	end
 
@@ -71,13 +77,39 @@ module IowaMusic
       @id = params[:id]
       @table = 'bands'
       @data = conn.exec_params("
-      UPDATE #{@table} SET location = $1, genre_one = $2, img_url = $3, website_url = $4, description = $5, author_id = $6 
+      UPDATE #{@table} SET location = $1, genre_one = $2, img_url = $3, website_url = $4, description = $5, author_id = $6, edited = CURRENT_TIMESTAMP 
         WHERE id = #{@id} returning *",
         [location, genre_one, img_url, website_url, description, author_id]).to_a
       @entry_submitted = true
       erb :bands_edit
     end
     ### end bands ###
+
+    ### create bands ####
+    get '/create_entry/bands' do
+      erb :bands
+    end
+    post '/create_entry/bands' do
+      author_id = params['author']
+      b_name = params["b_name"]
+      b_img_url = params["b_img_url"]
+      b_genre_one = params["b_genre_one"]
+      b_location = params["b_location"]
+      b_description = params["b_description"]
+      b_website_url = params["b_website_url"]
+
+      conn.exec_params(
+          "INSERT INTO bands (name, img_url, genre_one, location, description, author_id, website_url, edited) 
+          VALUES ($1, $2, $3, $4, $5, $6, $7, CURRENT_TIMESTAMP)",
+          [b_name, b_img_url, b_genre_one, b_location, b_description, author_id, b_website_url]
+        )
+      @entry_submitted = true
+      erb :bands
+    end
+
+
+    ### end create bands ###
+
 
 
     ### festivals ###
@@ -243,11 +275,15 @@ module IowaMusic
     end
 
     ### random ###
-    get '/random' do
-      @pick = 
-      @data = conn.exec("
-      SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';")
-      erb :random
+    #### incomplete ####
+    get '/random' do 
+      category = 'bands' #entries.sample.to_s
+      rand_ids = conn.exec_params("SELECT id FROM #{category}")
+      rand_article = rand_ids.to_a.sample
+      rand_article_id = rand_article["id"]
+
+      redirect "/bands/#{rand_article_id}"
+  
     end
 
 
@@ -279,29 +315,9 @@ module IowaMusic
       @entry_submitted = true
       erb :albums
     end
+
     ### end create albums ###
 
-    ### create bands ####
-    get '/create_entry/bands' do
-      erb :bands
-    end
-    post '/create_entry/bands' do
-      b_name = params["b_name"]
-      b_img_url = params["b_img_url"]
-      b_genre_one = params["b_genre_one"]
-      b_location = params["b_location"]
-      b_description = params["b_description"]
-      b_website_url = params["b_website_url"]
-
-      conn.exec_params(
-          "INSERT INTO bands (name, img_url, genre_one, location, description, website_url) 
-          VALUES ($1, $2, $3, $4, $5, $6)",
-          [b_name, b_img_url, b_genre_one, b_location, b_description, b_website_url]
-        )
-      @entry_submitted = true
-      erb :bands
-    end
-    ### end create bands ###
 
     ### create festivals ####
     get '/create_entry/festivals' do
