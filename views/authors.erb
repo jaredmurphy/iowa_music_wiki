@@ -1,0 +1,23 @@
+
+<div id="list_content"  class="eight columns">
+	<h1 class="page_title">Authors</h1>
+	<% @authors.each do |author| %>
+		<div>
+			<p>Username: <%= author['username'] %></p>
+			<p>Contact: </p>
+			<p>Authorship Score: <%= author['edit_count'] %> </p>
+			<p>Contributions: </p>
+
+			<% @articles.each do |article| %>
+				<% if article['author_id'] == author['id'] %>
+					<a href="article/<%= article['id'] %>">
+						<p><%= article['name'] %></p>
+					</a>
+				<% end %> <!-- end if statement -->
+			<% end %> <!-- end @articles loop -->
+
+		</div>
+		<br>
+	<% end %> <!-- end @authors loop -->
+</div> <!-- end content div -->
+

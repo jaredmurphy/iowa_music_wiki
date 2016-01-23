@@ -10,35 +10,26 @@
 
 	<% else %>
 
+
 		<% if session['author_id'] %>
 			<% @author = session['author_id'] %>
-			<%= @author %>
-			<form class="create_entry" action="/create_entry/bands" method="post">
-				<input type="hidden" name="author" value="<%=@author%>"/>	
+			<p><%= @author %></p>
+		
+			<form class="create_entry" action="/create_entry" method="post">
+				<input type="hidden" name="@author" value="<%=@author%>"/>	
 				<div class="input-row">
-					<label for="b_name">Band Name: </label>
-					<input  type="text" name="b_name" />
+					<label for="name">Name: </label>
+					<input  type="text" name="name" />
 				</div>
 				<div class="input-row">
-					<label for="b_location">City: </label>
-					<input  type="text" name="b_location" />
+					<label for="category">Category: </label>
+					<input  type="text" name="category" />
 				</div>
 				<div class="input-row">
-					<label for="b_genre_one">Genre: </label>
-					<input  type="text" name="b_genre_one" />
+					<label for="location">Location: </label>
+					<input  type="text" name="location" />
 				</div>
-				<div class="input-row">
-					<label for="b_img_url">Image URL: </label>
-					<input class="u-full-width" type="text" name="b_img_url" />
-				</div>
-				<div class="input-row">
-					<label for="b_website_url">Website URL: </label>
-					<input class="u-full-width" type="text" name="b_website_url"/>
-				</div>
-				<div class="input-row">
-					<label for="b_description">Description: </label>
-					<textarea class="u-full-width" name="b_description"></textarea>
-				</div>
+
 				<div class="input-row">
 					<input class="button-primary" type="submit" value="Submit"/>
 				</div>

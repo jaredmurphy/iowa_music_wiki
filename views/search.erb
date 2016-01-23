@@ -1,0 +1,18 @@
+<div id="list_content"  class="eight columns">
+	<h3>Search Results</h3>
+	<% if @result.length > 0 %>
+		<% @result.each do |hit| %>
+
+			<a href="/article/<%= hit['id'] %>">
+				<img src="<%= hit['img_url'] %>">
+				<p><input class="button-primary" type="submit" value="<%= hit['name'] %>"></p>
+			</a>
+
+
+		<% end %>
+	<% else %>
+		<p>Sorry, nothing came up in that search</p>
+		<p>Search again, or<a href='/articles'> browse by category</a></p>
+	<% end %>
+
+</div>

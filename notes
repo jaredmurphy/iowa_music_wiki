@@ -1,5 +1,28 @@
 notes
 
+    <p><%= @data['genre_one'] %></p>
+    <p><%= @description %></p>
+    <p><%= @data['location'] %></p>
+    ====================================
+
+
+
+  VALUES (name, categories)
+  ('Mighty Shady', 'bands'),
+  ('DG's', 'venues'),
+  ('Iowa Music Store', 'record stores'), 
+  ('DoubleThink', 'albums'), 
+  ('Nova Labs', 'labels')
+  ")
+
+  ======================================
+  get '/search' do 
+      @entries 
+      @query = "%#{params['query']}%"
+      @result = conn.exec_params("SELECT name, id FROM bands WHERE name ILIKE $1;", [@query]).to_a
+      erb :search
+    end
+
 
 <!-- 	for partials for forms	<% @categories.each #do |category| %>
 		<%= render category.erb %>
