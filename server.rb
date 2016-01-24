@@ -100,6 +100,7 @@ module IowaMusic
     ### create article ###
     ######################
     get '/create_entry' do
+      @categories = entries.to_a.sort!
       erb :create_entry
     end
     post '/create_entry' do
@@ -114,7 +115,7 @@ module IowaMusic
     
       conn.exec_params(
         "INSERT INTO articles (name, website_url, img_url, description, category, author_id, location, edited) 
-        VALUES ($1, $2, $3, $4, $5, $6, $7 CURRENT_TIMESTAMP)",
+        VALUES ($1, $2, $3, $4, $5, $6, $7, CURRENT_TIMESTAMP)",
         [name, website_url, img_url, description, category, author_id, location]
       )
       @entry_submitted = true

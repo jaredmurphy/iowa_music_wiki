@@ -94,6 +94,7 @@ color: white;
 
 	#categories {
 		margin-left: 0px;
+		
 	}
 
 
@@ -103,6 +104,36 @@ color: white;
 #form {
 	margin-right: 10px;
 }
+
+
+
+.albums_entry {
+	display: none;
+}
+.bands_entry {
+	display: none;
+}
+.festivals_entry {
+	display: none;
+}
+.labels_entry {
+	display: none;
+}
+.record_stores_entry {
+	display: none;
+}
+.studios_entry {
+	display: none;
+}
+.venues_entry {
+	display: none;
+}
+
+.clicked {
+	display: block;
+}
+
+
 
 /*** FOOTER ***/
 	.footer {

@@ -1,17 +1,19 @@
 
 <div id="list_content"  class="eight columns">
 	<h1 class="page_title">Stuff</h1>
-			<% @categories.each do |category| %>
-				<div>
-				<a href="/<%= category %>"><input class="button-primary" type="submit" value="<%= category.capitalize %>"></a>
-				</div>
-			<% end %>
+	
+	<% @categories.each do |category| %>
+		<div>
+			<input class="button-primary <%=category%>_select" type="submit" 
+			value="<%= category.capitalize %>">
+		</div>
+	<% end %>
 			
-			<% @articles.each do |article| %>
-				<div>
-					<a href="/article/<%= article['id'] %>" >
-						<p> <%= article['name'] %></p>
-					</a>
-				</div>
-			<% end %>
+	<% @articles.each do |article| %>
+		<div>
+			<a href="/article/<%= article['id'] %>" class ="<%= article['category'] %>_entry">
+				<p> <%= article['name'] %></p>
+			</a>
+		</div>
+	<% end %>
 </div>
