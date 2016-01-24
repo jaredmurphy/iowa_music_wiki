@@ -1,5 +1,152 @@
 notes
 
+
+
+$( document ).ready(function() {
+  
+    entries = ['albums', 'bands', 'festivals', 'labels', 'record_stores', 'studios', 'venues'];
+
+    entries.forEach()
+    
+    $(".albums_select").click(function(){
+      $("#albums_entry").show();
+  });
+
+  $(".bands_select").click(function(){
+      $("#bands_entry").css({"display": "block"});
+  });
+
+  $(".festivals_select").click(function(){
+      $("#festivals_entry").show();
+  });
+});
+
+
+
+entries = ['albums', 'bands', 'festivals', 'labels', 'record_stores', 'studios', 'venues'];
+
+=======================================================================
+
+            <!-- for labels -->
+      <form id="labels_entry" action="/create_entry" method="post">
+      <input type="hidden" name="@author" value="<%=@author%>"/>
+        <input type="hidden" name="category" value="labels"/>
+        <div class="input-row">
+          <label for="name">label Name: </label>
+          <input  type="text" name="name" />
+        </div>    
+        <div class="input-row">
+          <label for="bands">Bands: </label>
+          <input  type="text" name="bands" />
+        </div>      
+        <div class="input-row">
+          <label for="img_url">Image URL: </label>
+          <input  type="text" name="img_url" />
+        </div>
+        <div class="input-row">
+          <label for="location">City: </label>
+          <input  type="text" name="location" />
+        </div>
+        <div class="input-row">
+          <label for="website_url">Website URL: </label>
+          <input  type="text" name="website_url" />
+        </div>
+        <div class="input-row">
+          <label for="description">Description: </label>
+          <textarea class="u-full-width" name="description"></textarea>
+        </div>
+        <div class="input-row">
+          <input class="button-primary" type="submit" value="Submit"/>
+        </div>
+      </form>                                                                                           
+            <!-- for venues -->
+      <form id="venues_entry" action="/create_entry" method="post">
+      <input type="hidden" name="@author" value="<%=@author%>"/>
+        <input type="hidden" name="category" value="venues"/>
+        <div class="input-row">
+          <label for="name">Venue Name: </label>
+          <input  type="text" name="name" />
+        </div>    
+        <div class="input-row">
+          <label for="img_url">Image URL: </label>
+          <input  type="text" name="img_url" />
+        </div>
+        <div class="input-row">
+          <label for="location">City: </label>
+          <input  type="text" name="location" />
+        </div>
+        <div class="input-row">
+          <label for="website_url">Website URL: </label>
+          <input  type="text" name="website_url" />
+        </div>
+        <div class="input-row">
+          <label for="description">Description: </label>
+          <textarea class="u-full-width" name="description"></textarea>
+        </div>
+        <div class="input-row">
+          <input class="button-primary" type="submit" value="Submit"/>
+        </div>
+      </form>    
+
+
+            <!-- for festivals -->
+    <form id="festivals_entry" action="/create_entry" method="post">
+      <input type="hidden" name="@author" value="<%=@author%>"/>
+        <input type="hidden" name="category" value="festivals"/>
+        <div class="input-row">
+          <label for="name">Festival Name: </label>
+          <input  type="text" name="name" />
+        </div>    
+        <div class="input-row">
+          <label for="img_url">Image URL: </label>
+          <input  type="text" name="img_url" />
+        </div>
+        <div class="input-row">
+          <label for="location">City: </label>
+          <input  type="text" name="location" />
+        </div>
+        <div class="input-row">
+          <label for="website_url">Website URL: </label>
+          <input  type="text" name="website_url" />
+        </div>
+        <div class="input-row">
+          <label for="description">Description: </label>
+          <textarea class="u-full-width" name="description"></textarea>
+        </div>
+        <div class="input-row">
+          <input class="button-primary" type="submit" value="Submit"/>
+        </div>
+      </form>
+              <!-- for record_stores -->  
+      <form id="record_stores_entry" action="/create_entry" method="post">     
+        <input type="hidden" name="@author" value="<%=@author%>"/>  
+        <input type="hidden" name="record_stores" value="record_stores"/>
+        <div class="input-row">
+          <label for="name">Store Name: </label>
+          <input  type="text" name="name" />
+        </div>
+        <div class="input-row">
+          <label for="img_url">Image URL: </label>
+          <input  type="text" name="img_url" />
+        </div>
+        <div class="input-row">
+          <label for="location">City: </label>
+          <input  type="text" name="location" />
+        </div>
+        <div class="input-row">
+          <label for="website_url">Website URL: </label>
+          <input  type="text" name="website_url" />
+        </div>
+        <div class="input-row">
+          <label for="description">Description: </label>
+          <textarea class="u-full-width" name="description"></textarea>
+        </div>
+        <div class="input-row">
+          <input class="button-primary" type="submit" value="Submit"/>
+        </div>
+      </form>
+      ================================================================
+
     <p><%= @data['genre_one'] %></p>
     <p><%= @description %></p>
     <p><%= @data['location'] %></p>

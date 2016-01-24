@@ -3,7 +3,7 @@
 
 		<h1 class="page_title"><%= @data['name'] %></h1>
 
-		<p>Last Edited by: <%= @author['username'] %> on <%= @data['edited'] %> </p>
+		<p>Last Edited by: <%= @edited_by['username'] %> on <%= @data['edited'] %> </p>
 		<% if session['author_id'] %>
 			
 			<p><a href='/article/<%= @data['id'] %>/edit'>Edit</a><p>

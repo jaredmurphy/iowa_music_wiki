@@ -44,27 +44,27 @@ module IowaMusic
     #################################
     ### view articles by category ###
     #################################
-  	get '/articles' do
+    get '/articles' do
       @categories = entries.to_a.sort!  
-  		@articles = conn.exec("
-  			SELECT * FROM articles;").to_a.sort!{|a,b| a['category']<=>b['category']}
-  		erb :categories
-  	end
+      @articles = conn.exec("
+        SELECT * FROM articles").to_a.sort_by!{ |x| x['name'] }
+      erb :categories
+    end
     ###############################
     ### view individual article ###
     ###############################
-  	get '/article/:id' do
-  		@id = params[:id]
+    get '/article/:id' do
+      @id = params[:id]
       markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions = {})
 
-  		@data = conn.exec_params("SELECT * FROM articles WHERE id = $1", [@id]).first
+      @data = conn.exec_params("SELECT * FROM articles WHERE id = $1", [@id]).first
 
-      @author = conn.exec_params("
+      @edited_by = conn.exec_params("
         SELECT username FROM authors WHERE id = $1", [@data['author_id'].to_i]).first
 
       @description = markdown(@data['description'])
-  		erb :article
-  	end
+      erb :article
+    end
 
     ####################
     ### edit article ###
@@ -91,7 +91,7 @@ module IowaMusic
         WHERE id = #{@id} returning *",
         [img_url, description, author_id, second_category, location]).to_a
 
-      conn.exec_params("UPDATE authors SET edit_count = edit_count + 1")
+      conn.exec_params("UPDATE authors SET edit_count = edit_count + 1 WHERE id = #{author_id}")
       @entry_submitted = true
       erb :article_edit
     end
@@ -118,6 +118,7 @@ module IowaMusic
         VALUES ($1, $2, $3, $4, $5, $6, $7, CURRENT_TIMESTAMP)",
         [name, website_url, img_url, description, category, author_id, location]
       )
+      conn.exec_params("UPDATE authors SET edit_count = edit_count + 1 WHERE id = #{author_id}")
       @entry_submitted = true
       erb :create_entry
     end
@@ -235,4 +236,3 @@ module IowaMusic
     end #end private
   end #end class
 end#end module
-
