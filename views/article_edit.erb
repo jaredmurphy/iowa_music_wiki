@@ -5,7 +5,6 @@
 	<% else %>
 		<% if session['author_id'] %>
 			<% @editing = session['author_id'] %>
-			<%= @editing %>
 			<%= @editing['username'] %>
 			<h1> <%= @data[0]['name'] %> </h1>
 			<p><%=@data[0]['id']%>
@@ -61,8 +60,8 @@
 						<option placeholder="Default" value="@data[0]['second_category']">
 							<%= @data[0]['second_category'] %>
 						</option>
-					<% elsif %>
-						<option placeholder="First name" value="">SELECT</option
+					<% else %>
+						<option placeholder="First name" value="">SELECT</option>
 					<% end %>
 					<% @categories.each do |category| %>
 								<option name="second_category" value="<%= category %>">
