@@ -168,6 +168,33 @@
 		          <input class="button-primary" type="submit" value="Submit"/>
 		        </div>
 		      </form>
+		      			 <!-- for studois --> 
+		      <form class="studios_entry" action="/create_entry" method="post">     
+		        <input type="hidden" name="@editing" value="<%=@editing%>"/> 
+		        <input type="hidden" name="category" value="studios"/>
+		        <div class="input-row">
+		          <label for="name">Studio Name: </label>
+		          <input  type="text" name="name" />
+		        </div>
+		        <div class="input-row">
+		          <label for="img_url">Image URL: </label>
+		          <input  type="text" name="img_url" />
+		        </div>
+		        <div class="input-row">
+		          <label for="location">City: </label>
+		          <input  type="text" name="location" />
+		        </div>
+		        <div class="input-row">
+		          <label for="website_url">Website URL: </label>
+		          <input  type="text" name="website_url" />
+		        </div>
+		        <div class="input-row">
+		          <label for="description">Description: </label>
+		          <textarea class="u-full-width" name="description"></textarea>
+		        </div>
+		        <div class="input-row">
+		          <input class="button-primary" type="submit" value="Submit"/>
+		        </div>
 
 				            <!-- for venues -->
 		      <form class="venues_entry" action="/create_entry" method="post">
