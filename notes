@@ -1,8 +1,19 @@
-notes
+notes       
 
+
+
+
+<div class="input-row">
+          <label for="genres">Add genre: </label>
+          <input type="text" name="genres" />
+        </div>  
+===============================================================
+      @edited_by = conn.exec_params("
+        SELECT username FROM authors WHERE id = $1", [@data['author_id'].to_i]).first
 ===============================================================
   conn.exec_params("UPDATE authors SET edit_count = edit_count + 1 WHERE id = #{author_id}")
 ===============================================================
+
                 $("." + category + "_entry").fadeIn('slow', function() {});
 =============================================
 
