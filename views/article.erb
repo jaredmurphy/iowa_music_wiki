@@ -24,6 +24,7 @@
 
 
 		<% if @data['bands'] %>
+			<% if @data['bands'].length > 0 %>
 			<% genres = @data['bands'].gsub("{", "").gsub("}", "").gsub("\"", "").split(",") %>
 			<h4>Bands:</h4>
 			<% genres.each do |band| %>
@@ -37,7 +38,7 @@
 		<% if location.length > 0 %>
 			<p>Location: <%= @data['location'] %></p>
 		<% end %>
-		
+
 		<% video = @data['video_url'] %>
 		<% if video %>
 		<% if video != nil %>
