@@ -13,8 +13,7 @@ $( document ).ready(function() {
            }
            setTimeout(appear,500);
 
-           console.log(category + " clicked")                
-         //} // ends if statement for click funciton       
+           console.log(category + " clicked")                  
      }); // ends click funciton
      } // ends showCategoryForm function
  

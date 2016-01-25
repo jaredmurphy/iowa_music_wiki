@@ -251,14 +251,14 @@ module IowaMusic
 
     def conn
         if ENV["RACK_ENV"] == 'production'
-           @conn ||= PG.connect(
+           @@conn ||= PG.connect(
             dbname: ENV["POSTGRES_DB"],
             host: ENV["POSTGRES_HOST"],
             password: ENV["POSTGRES_PASS"],
             user: ENV["POSTGRES_USER"]
         )
         else
-           @conn ||= PG.connect(dbname: "iowa_music_wiki_db")
+           @@conn ||= PG.connect(dbname: "iowa_music_wiki_db")
         end
     end #end private
   end #end class
