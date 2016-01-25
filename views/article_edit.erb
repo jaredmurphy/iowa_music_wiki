@@ -1,7 +1,7 @@
 <div id="list_content"  class="eight columns">
 	<% if @entry_submitted == true %>
-	 <h1> Thanks! </h1>
-	 <a href="/article/<%= @id %>"><h3> See your changes here</h3></a>
+	 	<h1> Thanks! </h1>
+	 	<a href="/article/<%= @id %>"><h3> See your changes here</h3></a>
 	<% else %>
 		<% if session['author_id'] %>
 			<% @editing = session['author_id'] %>
@@ -17,10 +17,21 @@
 				</div>
 
 				<% if @data[0]['category'] == 'bands' %>
-					<div class="input-row">
-						<label for="label">Add Label: </label>
-						<input type="text" name="label" />
-					</div>
+					<label>Add Label: </label>
+					<% label_id = @data[0][label_id] %>
+					<select name="label_id">
+						<% if label_id != nil && label_id.length > 0 %>
+							<option placeholder="Default" value="@data[0][label_id]">SELECT</option>
+						<% elsif %>
+							<option placeholder="First name" value="">SELECT</option>
+						<% end %>
+						<% @labels.each do |label| %>
+								<option  name="<%= label['id'] %>" value="<%= label['id'] %>">
+								<%= label['name'] %></option>
+	  					<% end %>
+					</select> 
+				<% end %> 
+
 					<div class="input-row">
 						<label for="genres">Add genre: </label>
 						<input type="text" name="genres" />
@@ -29,19 +40,41 @@
 						<label for="video_url">Youtube Embedded Link: </label>
 						<input type="text" name="video_url" />
 					</div>
+				
+
+				<% if @data[0]['category'] == 'labels' ||  @data[0]['category'] == 'studios'%>
+					<label>Add Band: </label>
+					<select name="band_ids">
+						<% @bands.each do |article| %>
+							<% if article['category'] == 'bands' %>
+								<option name='band_ids' value="<%= article['id'] %>">
+								<%= article['name'] %></option>
+	  						<% end %>
+	  					<% end %>
+					</select>  
 				<% end %>
 
-				<% if @data[0]['category'] == 'labels' ||  @data[0]['category'] == 'albums'%>
-					<div class="input-row">
-						<label for="bands">Add Band: </label>
-						<input type="text" name="bands" />
-					</div>
-				<% end %>
 
-				<div class="input-row">
-					<label for="second_category">2nd Category: </label>
-					<input  value ="<%= @data[0]['location'] %>" type="text" name="second_category" />
-				</div>
+
+				<% second_category = @data[0]['second_category'] %>
+				<label>Add 2nd Category: </label>
+				<select name="second_category">
+					<% if second_category != nil && second_category.length > 0 %>
+						<option placeholder="Default" value="@data[0]['second_category']">
+							<%= @data[0]['second_category'] %>
+						</option>
+					<% elsif %>
+						<option placeholder="First name" value="">SELECT</option
+					<% end %>
+					<% @categories.each do |category| %>
+								<option name="second_category" value="<%= category %>">
+						<%= category %></option>
+					<% end %>
+				</select>
+
+
+
+
 				<div class="input-row">
 					<label for="location">City: </label>
 					<input  value ="<%= @data[0]['location'] %>" type="text" name="location" />
@@ -60,5 +93,5 @@
 			<h1>Please <a href='/login'>Login</a> or <a href='/signup'> Sign up</a></h1>
 		<% end %>
 	
-<% end %>
-	</div>
+	<% end %>
+</div>

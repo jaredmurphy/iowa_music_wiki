@@ -24,7 +24,7 @@ conn.exec("CREATE TABLE articles(
 	 location VARCHAR,
 	 bands TEXT[][],
 	 band_id VARCHAR,
-	 label VARCHAR,
+	 label_id VARCHAR,
 	 
 	 website_url VARCHAR,
 	 listen_url VARCHAR,

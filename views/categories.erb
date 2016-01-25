@@ -9,7 +9,7 @@
 	<% end %>
 			
 	<% @articles.each do |article| %>
-		<form  class ="<%= article['category'] %>_entry">
+		<form  class ="<%= article['category'] %>_entry <%= article['second_category'] %>_entry">
 			<div>
 				<a href="/article/<%= article['id'] %>" >
 					<h4> <%= article['name'] %></h4>

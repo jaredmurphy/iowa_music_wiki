@@ -64,7 +64,8 @@ module IowaMusic
 
       @edited_by = conn.exec_params("
         SELECT username FROM authors WHERE id = $1", [@data['author_id'].to_i]).first
-
+      @bands = conn.exec("SELECT id, name FROM articles WHERE id = $1", [@data['bands'].to_i])
+      @band = conn.exec("SELECT *, name FROM articles WHERE id = $1", [@data['band_id'].to_i]).first
       @description = markdown(@data['description'])
       erb :article
     end
@@ -74,8 +75,11 @@ module IowaMusic
     ####################
     get '/article/:id/edit' do
       @id = params[:id]
+      @categories = entries.to_a
       @data = conn.exec("
       SELECT * FROM articles WHERE id = #{@id}").to_a
+      @bands = conn.exec("SELECT * FROM articles WHERE category = 'bands'");
+      @labels = conn.exec("SELECT * FROM articles WHERE category = 'labels'");
       erb :article_edit
     end
     
@@ -90,15 +94,16 @@ module IowaMusic
       website_url = params["website_url"]
       genres = params["genres"]
       video_url = params["video_url"]
-      bands = params["bands"]
-      label = params["label"]
+      band_ids = params["band_ids"]
+      label_id= params["label_id"]
 
       @data = conn.exec_params("
-        UPDATE articles SET img_url = $1, description = $2, author_id = $3, second_category = $4, location = $5, video_url = $6, label = $7, edited = CURRENT_TIMESTAMP 
+        UPDATE articles SET img_url = $1, description = $2, author_id = $3, second_category = $4, location = $5, video_url = $6, label_id = $7, edited = CURRENT_TIMESTAMP 
         WHERE id = #{@id} returning *",
-        [img_url, description, author_id, second_category, location, video_url, label]).to_a
+        [img_url, description, author_id, second_category, location, video_url, label_id]).to_a
 
-      conn.exec_params("UPDATE articles SET bands = array_append(bands, '#{bands}') WHERE id = #{@id}")
+
+      conn.exec_params("UPDATE articles SET bands = array_append(bands, '#{band_ids}') WHERE id = #{@id}")
       conn.exec_params("UPDATE articles SET genres = array_append(genres,'#{genres}')  WHERE id = #{@id}")
       conn.exec_params("UPDATE authors SET articles = array_append(articles, '#{@id.to_s}') WHERE id = #{author_id}")
       conn.exec_params("UPDATE authors SET edit_count = edit_count + 1 WHERE id = #{author_id}")
@@ -112,6 +117,7 @@ module IowaMusic
     ######################
     get '/create_entry' do
       @categories = entries.to_a.sort!
+      @articles = conn.exec_params("SELECT * FROM articles").to_a
       erb :create_entry
     end
     post '/create_entry' do
@@ -124,14 +130,14 @@ module IowaMusic
       location = params['location']
       description = params['description']
       genres =   params["genres"] 
+      band_id = params["band_id"]
 
       conn.exec_params(
-        "INSERT INTO articles (name, website_url, img_url, description, category, author_id, location, genres, edited) 
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, CURRENT_TIMESTAMP)",
-        [name, website_url, img_url, description, category, author_id, location, genres]
+        "INSERT INTO articles (name, website_url, img_url, description, category, author_id, location, genres, band_id, edited) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, CURRENT_TIMESTAMP)",
+        [name, website_url, img_url, description, category, author_id, location, genres, band_id]
       )
 
-      
       conn.exec_params("UPDATE authors SET edit_count = edit_count + 1 WHERE id = #{author_id}")
       @entry_submitted = true
       erb :create_entry

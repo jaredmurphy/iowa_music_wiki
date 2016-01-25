@@ -19,6 +19,42 @@
 				</div>
 			<% end %>
 
+
+			<!-- for albums -->
+			<form  class="albums_entry" action="/create_entry" method="post">
+			<input type="hidden" name="@editing" value="<%=@editing%>"/>
+				<input type="hidden" name="category" value="albums"/>
+				<div class="input-row">
+					<label for="name">Album Name: </label>
+					<input  type="text" name="name" />
+				</div>			
+				<div class="input-row">
+					<label for="img_url">Image URL: </label>
+					<input  type="text" name="img_url" />
+				</div>
+				<label>Band: </label>
+				<select name="band_id">
+					<% @articles.each do |article| %>
+						<% if article['category'] == 'bands' %>
+  						<option name='band_ids' value="<%= article['id'] %>"><%= article['name'] %></option>
+  						<% end %>
+  					<% end %>
+				</select>
+
+				<div class="input-row">
+					<label for="listen_url">Link for listening: </label>
+					<input  type="text" name="listen_url" />
+				</div>
+				<div class="input-row">
+					<label for="description">Description: </label>
+					<textarea class="u-full-width" name="description"></textarea>
+				</div>
+				<div class="input-row">
+					<input class="button-primary" type="submit" value="Submit"/>
+				</div>
+			</form>
+
+
 			<!-- for bands -->
 			<form  class="bands_entry" action="/create_entry" method="post">
 			<input type="hidden" name="@editing" value="<%=@editing%>"/>
@@ -57,10 +93,6 @@
 		          <input  type="text" name="name" />
 		        </div>    
 		        <div class="input-row">
-		          <label for="bands">Bands: </label>
-		          <input  type="text" name="bands" />
-		        </div>      
-		        <div class="input-row">
 		          <label for="img_url">Image URL: </label>
 		          <input  type="text" name="img_url" />
 		        </div>
@@ -80,36 +112,6 @@
 		          <input class="button-primary" type="submit" value="Submit"/>
 		        </div>
 		      </form>                                                                                           
-		            <!-- for venues -->
-		      <form class="venues_entry" action="/create_entry" method="post">
-		      <input type="hidden" name="@editing" value="<%=@editing%>"/>
-		        <input type="hidden" name="category" value="venues"/>
-		        <div class="input-row">
-		          <label for="name">Venue Name: </label>
-		          <input  type="text" name="name" />
-		        </div>    
-		        <div class="input-row">
-		          <label for="img_url">Image URL: </label>
-		          <input  type="text" name="img_url" />
-		        </div>
-		        <div class="input-row">
-		          <label for="location">City: </label>
-		          <input  type="text" name="location" />
-		        </div>
-		        <div class="input-row">
-		          <label for="website_url">Website URL: </label>
-		          <input  type="text" name="website_url" />
-		        </div>
-		        <div class="input-row">
-		          <label for="description">Description: </label>
-		          <textarea class="u-full-width" name="description"></textarea>
-		        </div>
-		        <div class="input-row">
-		          <input class="button-primary" type="submit" value="Submit"/>
-		        </div>
-		      </form>    
-
-
 		            <!-- for festivals -->
 		    <form class="festivals_entry" action="/create_entry" method="post">
 		     <input type="hidden" name="@editing" value="<%=@editing%>"/>
@@ -167,6 +169,34 @@
 		        </div>
 		      </form>
 
+				            <!-- for venues -->
+		      <form class="venues_entry" action="/create_entry" method="post">
+		      <input type="hidden" name="@editing" value="<%=@editing%>"/>
+		        <input type="hidden" name="category" value="venues"/>
+		        <div class="input-row">
+		          <label for="name">Venue Name: </label>
+		          <input  type="text" name="name" />
+		        </div>    
+		        <div class="input-row">
+		          <label for="img_url">Image URL: </label>
+		          <input  type="text" name="img_url" />
+		        </div>
+		        <div class="input-row">
+		          <label for="location">City: </label>
+		          <input  type="text" name="location" />
+		        </div>
+		        <div class="input-row">
+		          <label for="website_url">Website URL: </label>
+		          <input  type="text" name="website_url" />
+		        </div>
+		        <div class="input-row">
+		          <label for="description">Description: </label>
+		          <textarea class="u-full-width" name="description"></textarea>
+		        </div>
+		        <div class="input-row">
+		          <input class="button-primary" type="submit" value="Submit"/>
+		        </div>
+		      </form>    
 		<% else %>
 			<h1>Please <a href='/login'>Login</a> or <a href='/signup'> Sign up</a></h1>
 		<% end %>

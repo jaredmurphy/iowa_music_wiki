@@ -3,7 +3,8 @@
 
 		<h1 class="page_title"><%= @data['name'] %></h1>
 		<a href="/articles"><input class="button-primary" type="submit" value="<%= @data['category'] %>"></a>
-		<% if @data['second_category'] %>
+	
+		<% if @data['second_category'] != nil && @data['second_category'].length > 0 %>
 			<a href="/articles"><input class="button-primary" type="submit" value="<%= @data['second_category'] %>"></a>
 		<% end %>
 
@@ -21,31 +22,42 @@
 			<% end %>
 		<% end %>
 
+		<% if @data['label_id'] %>
+			<label>Label: </label>
+			<a href="/article/<%=@data['label_id'] %>"><%=@data['label_id'] %></a>
+		<% end %>
 
+		<% if @data['category'] == 'albums'%>
+			<label>Band: </label>
+			<a href="/article/<%= @band['id'] %>"><%= @band['name'] %></p>
+		<% end %>
 
-		<% if @data['bands'] %>
-			<% if @data['bands'].length > 0 %>
-			<% genres = @data['bands'].gsub("{", "").gsub("}", "").gsub("\"", "").split(",") %>
-			<h4>Bands:</h4>
-			<% genres.each do |band| %>
-				<% if band.length > 0 %>
-					<p><%= band.upcase %></p>
+		<% if @data['category'] == 'labels' || @data['category'] == 'studios'%>
+			<% if @data['bands'] != nil  && @data['bands'].length > 0 %>
+				<% bands= @data['bands'].gsub("{", "").gsub("}", "").gsub("\"", "").split("") %>
+				<label>Bands: </label>
+				<% bands.each do |band| %>
+						<a href="/article/<%= band %>"> <%= band %></a>
 				<% end %>
 			<% end %>
 		<% end %>
 
+	
 		<% location = @data['location'] %>
-		<% if location.length > 0 %>
-			<p>Location: <%= @data['location'] %></p>
+		<% if location != nil %>
+			<% if location.length > 0 %>
+				<p>Location: <%= @data['location'] %></p>
+			<% end %>
 		<% end %>
 
+		
 		<% video = @data['video_url'] %>
-		<% if video %>
 		<% if video != nil %>
-		<% if video.length > 0 %>
-			<iframe width="560" height="315" src="<%= @data['video_url'] %>" frameborder="0" allowfullscreen></iframe>
-		<% end %>
-		<% end %>
+		<% if video %>
+				<% if video.length > 0 %>
+					<iframe width="560" height="315" src="<%= @data['video_url'] %>" frameborder="0" allowfullscreen></iframe>
+				<% end %>
+			<% end %>
 		<% end %>
 
 		<p><%= @description %></p>
