@@ -1,12 +1,13 @@
 
 <div id="list_content"  class="eight columns">
+<% if session['author_id'] %>
 	<h1 class="page_title">Authors</h1>
 	<% @authors.each do |author| %>
 		<div>
 			<p>Username: <%= author['username'] %></p>
-			<p>Contact: </p>
+			<p>Contact: <a href="mailto:<%= author['email'] %>"><%= author['email'] %></a></p>
 			<p>Authorship Score: <%= author['edit_count'] %> </p>
-			<p>Contributions: </p>
+			<p>Latest Contributions: </p>
 
 			<% @articles.each do |article| %>
 				<% if article['author_id'] == author['id'] %>
@@ -19,5 +20,8 @@
 		</div>
 		<br>
 	<% end %> <!-- end @authors loop -->
+<% else %>
+	<h3> You must be <a href="/login">Logged In</a> to view this page </h3>
+<% end %>
 </div> <!-- end content div -->
 

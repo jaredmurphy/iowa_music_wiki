@@ -2,19 +2,53 @@
 <div id="list_content"  class="eight columns">
 
 		<h1 class="page_title"><%= @data['name'] %></h1>
-
-		<p>Last Edited by: <%= @edited_by['username'] %> on <%= @data['edited'] %> </p>
-		<% if session['author_id'] %>
-			
-			<p><a href='/article/<%= @data['id'] %>/edit'>Edit</a><p>
+		<a href="/articles"><input class="button-primary" type="submit" value="<%= @data['category'] %>"></a>
+		<% if @data['second_category'] %>
+			<a href="/articles"><input class="button-primary" type="submit" value="<%= @data['second_category'] %>"></a>
 		<% end %>
+
+		<% time = DateTime.parse(@data['edited']) %>
+		<p>Last Edited by: <a href="/authors"><%= @edited_by['username'] %></a> on <%=time.strftime("%B %d, %Y at %I:%M %p") %> <a href='/article/<%= @data['id'] %>/edit'>Edit</a></p>
 
 		<a href="/article/<%= @data['id'] %>"><img src="<%= @data['img_url'] %>"/></a>
 
-		<p><%= @data['category'] %></p>
-		<p><%= @data['genre_one'] %></p>
+		<% if @data['genres'] %>
+			<% genres = @data['genres'].gsub("{", "").gsub("}", "").gsub("\"", "").split(",") %>
+			<% genres.each do |genre| %>
+				<% if genre.length > 0 %>
+					<p>Genre: <%= genre.upcase %></p>
+				<% end %>
+			<% end %>
+		<% end %>
+
+
+
+		<% if @data['bands'] %>
+			<% genres = @data['bands'].gsub("{", "").gsub("}", "").gsub("\"", "").split(",") %>
+			<h4>Bands:</h4>
+			<% genres.each do |band| %>
+				<% if band.length > 0 %>
+					<p><%= band.upcase %></p>
+				<% end %>
+			<% end %>
+		<% end %>
+
+		<% location = @data['location'] %>
+		<% if location.length > 0 %>
+			<p>Location: <%= @data['location'] %></p>
+		<% end %>
+		
+		<% video = @data['video_url'] %>
+		<% if video %>
+		<% if video != nil %>
+		<% if video.length > 0 %>
+			<iframe width="560" height="315" src="<%= @data['video_url'] %>" frameborder="0" allowfullscreen></iframe>
+		<% end %>
+		<% end %>
+		<% end %>
+
 		<p><%= @description %></p>
-		<p><%= @data['location'] %></p>
+
 		<a href="<%= @data['website_url'] %>"><input class="button-primary" type="submit" value="Website"></a>
 		<br>
 

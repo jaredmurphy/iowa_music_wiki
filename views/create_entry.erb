@@ -10,23 +10,23 @@
 	
 
 		<% if session['author_id'] %>
-			<% @author = session['author_id'] %>
-			
+			<% @editing = session['author_id'] %>
+			<h4>First, select a category</h4>
 
 			<% @categories.each do |category| %>
-				<div>
+				<div style="display: inline">
 				<input class="button-primary <%=category%>_select" type="submit" value="<%= category.capitalize %>">
 				</div>
 			<% end %>
 
 			<!-- for bands -->
 			<form  class="bands_entry" action="/create_entry" method="post">
-			<input type="hidden" name="@author" value="<%=@author%>"/>
+			<input type="hidden" name="@editing" value="<%=@editing%>"/>
 				<input type="hidden" name="category" value="bands"/>
 				<div class="input-row">
 					<label for="name">Band Name: </label>
 					<input  type="text" name="name" />
-				</div>				
+				</div>			
 				<div class="input-row">
 					<label for="img_url">Image URL: </label>
 					<input  type="text" name="img_url" />
@@ -50,7 +50,7 @@
 
 		            <!-- for labels -->
 		    <form class="labels_entry" action="/create_entry" method="post">
-		      <input type="hidden" name="@author" value="<%=@author%>"/>
+		      <input type="hidden" name="@editing" value="<%=@editing%>"/>
 		        <input type="hidden" name="category" value="labels"/>
 		        <div class="input-row">
 		          <label for="name">label Name: </label>
@@ -82,7 +82,7 @@
 		      </form>                                                                                           
 		            <!-- for venues -->
 		      <form class="venues_entry" action="/create_entry" method="post">
-		      <input type="hidden" name="@author" value="<%=@author%>"/>
+		      <input type="hidden" name="@editing" value="<%=@editing%>"/>
 		        <input type="hidden" name="category" value="venues"/>
 		        <div class="input-row">
 		          <label for="name">Venue Name: </label>
@@ -112,7 +112,7 @@
 
 		            <!-- for festivals -->
 		    <form class="festivals_entry" action="/create_entry" method="post">
-		      <input type="hidden" name="@author" value="<%=@author%>"/>
+		     <input type="hidden" name="@editing" value="<%=@editing%>"/>
 		        <input type="hidden" name="category" value="festivals"/>
 		        <div class="input-row">
 		          <label for="name">Festival Name: </label>
@@ -140,8 +140,8 @@
 		      </form>
 		              <!-- for record_stores -->  
 		      <form class="record_stores_entry" action="/create_entry" method="post">     
-		        <input type="hidden" name="@author" value="<%=@author%>"/>  
-		        <input type="hidden" name="record_stores" value="record_stores"/>
+		        <input type="hidden" name="@editing" value="<%=@editing%>"/> 
+		        <input type="hidden" name="category" value="record_stores"/>
 		        <div class="input-row">
 		          <label for="name">Store Name: </label>
 		          <input  type="text" name="name" />

@@ -4,17 +4,40 @@
 	 <a href="/article/<%= @id %>"><h3> See your changes here</h3></a>
 	<% else %>
 		<% if session['author_id'] %>
-			<% @author = session['author_id'] %>
-			<%= @author %>
-			<%= @author['username'] %>
+			<% @editing = session['author_id'] %>
+			<%= @editing %>
+			<%= @editing['username'] %>
 			<h1> <%= @data[0]['name'] %> </h1>
 			<p><%=@data[0]['id']%>
 			<form class="create_entry" action="/article/<%= @id %>/edit" method="post">
-				<input type="hidden" name="author" value="<%=@author%>"/>		
+				<input type="hidden" name="@editing" value="<%=@editing%>"/>		
 				<div class="input-row">
 					<label for="img_url">Image URL: </label>
 					<input value="<%= @data[0]['img_url'] %>" class="u-full-width" type="text" name="img_url" />
 				</div>
+
+				<% if @data[0]['category'] == 'bands' %>
+					<div class="input-row">
+						<label for="label">Add Label: </label>
+						<input type="text" name="label" />
+					</div>
+					<div class="input-row">
+						<label for="genres">Add genre: </label>
+						<input type="text" name="genres" />
+					</div>
+					<div class="input-row">
+						<label for="video_url">Youtube Embedded Link: </label>
+						<input type="text" name="video_url" />
+					</div>
+				<% end %>
+
+				<% if @data[0]['category'] == 'labels' ||  @data[0]['category'] == 'albums'%>
+					<div class="input-row">
+						<label for="bands">Add Band: </label>
+						<input type="text" name="bands" />
+					</div>
+				<% end %>
+
 				<div class="input-row">
 					<label for="second_category">2nd Category: </label>
 					<input  value ="<%= @data[0]['location'] %>" type="text" name="second_category" />

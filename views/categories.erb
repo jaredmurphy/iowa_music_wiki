@@ -2,8 +2,8 @@
 	<h1 class="page_title">Stuff</h1>
 	
 	<% @categories.each do |category| %>
-		<div>
-			<input class="button-primary <%= category %>_select" type="submit" 
+		<div style="display: inline">
+			<input class="button-primary category_selector <%= category %>_select" type="submit" 
 			value="<%= category.capitalize %>">
 		</div>
 	<% end %>

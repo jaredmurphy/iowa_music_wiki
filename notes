@@ -1,6 +1,33 @@
 notes
 
+===============================================================
+  conn.exec_params("UPDATE authors SET edit_count = edit_count + 1 WHERE id = #{author_id}")
+===============================================================
+                $("." + category + "_entry").fadeIn('slow', function() {});
+=============================================
 
+function showCategoryForm (category) { 
+      $("." + category + "_select").click(function(){
+        if ($(this).hasClass("clicked")) {
+          $("." + category + "_entry").fadeOut('slow', function() {
+              });
+          $(this).removeClass("clicked");
+        } 
+        else {
+          $("." + category + "_entry").fadeIn('slow', function() {
+             }).siblings("form").hide();
+          $('.clicked').removeClass('clicked');
+          $(this).addClass('clicked'); 
+
+        } // ends if statement for click funciton       
+    }); // ends click funciton
+    } // ends showCategoryForm function
+    entries = ['albums', 'bands', 'festivals', 'labels', 'record_stores', 'studios', 'venues'];
+    entries.forEach(showCategoryForm);
+    =================================================
+
+<p>Hi <%= current_user['username'] %> </p>
+=========================================
 
 $( document ).ready(function() {
   

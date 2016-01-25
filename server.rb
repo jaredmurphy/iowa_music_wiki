@@ -5,29 +5,31 @@ module IowaMusic
 
 ########### Table of Contents ###########
 #########################################
-########### things - line 35 ############
+########### things - line 37 ############
 #########################################
-## view articles by category - line 45 ##
+## view articles by category - line 48 ##
 #########################################
-### view individual article - line 54 ###
+### view individual article - line 57 ###
 #########################################
-######## edit article - line 68 #########
+######## edit article - line 73 #########
 #########################################
-####### create article - line 96 ########
+###### create article - line 111 ########
 #########################################
-####### random article - line 121 #######
+####### random article - line 141 #######
 #########################################
-######### search by article name ########
+### search by article name - line 151 ###
 #########################################
-######## current user - line 131 ########
+###### view author list - line 164 ######
 #########################################
-########### signup - line 143 ###########
+######## current user - line 176 ########
 #########################################
-########### login - line 160 ############
+########### signup - line 188 ###########
 #########################################
-########## logout - line 183 ############
+########### login - line 213 ############
 #########################################
-########## private - line 191 ###########
+########## logout - line 236 ############
+#########################################
+########## private - line 244 ###########
 #########################################
 
 
@@ -35,7 +37,8 @@ module IowaMusic
     ###### things #######
     #####################
     enable :sessions
-    entries = [:albums, :bands, :festivals, :labels, :record_stores, :studios, :venues]
+    entries = [:albums, :bands, :festivals, :labels, :record_stores, :songs, :studios, :venues]
+
 
     get '/' do
       erb :home
@@ -78,20 +81,28 @@ module IowaMusic
     
     post '/article/:id/edit' do
       @id = params[:id]
-      author_id = params['@author']
+      author_id = params['@editing']
       name = params["name"]
       second_category = params["second_category"]
       img_url = params["img_url"]
       location = params["location"]
       description = params["description"]
       website_url = params["website_url"]
+      genres = params["genres"]
+      video_url = params["video_url"]
+      bands = params["bands"]
+      label = params["label"]
 
       @data = conn.exec_params("
-        UPDATE articles SET img_url = $1, description = $2, author_id = $3, second_category = $4, location = $5, edited = CURRENT_TIMESTAMP 
+        UPDATE articles SET img_url = $1, description = $2, author_id = $3, second_category = $4, location = $5, video_url = $6, label = $7, edited = CURRENT_TIMESTAMP 
         WHERE id = #{@id} returning *",
-        [img_url, description, author_id, second_category, location]).to_a
+        [img_url, description, author_id, second_category, location, video_url, label]).to_a
 
+      conn.exec_params("UPDATE articles SET bands = array_append(bands, '#{bands}') WHERE id = #{@id}")
+      conn.exec_params("UPDATE articles SET genres = array_append(genres,'#{genres}')  WHERE id = #{@id}")
+      conn.exec_params("UPDATE authors SET articles = array_append(articles, '#{@id.to_s}') WHERE id = #{author_id}")
       conn.exec_params("UPDATE authors SET edit_count = edit_count + 1 WHERE id = #{author_id}")
+
       @entry_submitted = true
       erb :article_edit
     end
@@ -104,7 +115,7 @@ module IowaMusic
       erb :create_entry
     end
     post '/create_entry' do
-      author_id = params['@author']
+      author_id = params['@editing']
       name = params["name"]
       img_url = params["img_url"]
       website_url = params["website_url"]
@@ -112,12 +123,15 @@ module IowaMusic
       category = params["category"]
       location = params['location']
       description = params['description']
-    
+      genres =   params["genres"] 
+
       conn.exec_params(
-        "INSERT INTO articles (name, website_url, img_url, description, category, author_id, location, edited) 
-        VALUES ($1, $2, $3, $4, $5, $6, $7, CURRENT_TIMESTAMP)",
-        [name, website_url, img_url, description, category, author_id, location]
+        "INSERT INTO articles (name, website_url, img_url, description, category, author_id, location, genres, edited) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, CURRENT_TIMESTAMP)",
+        [name, website_url, img_url, description, category, author_id, location, genres]
       )
+
+      
       conn.exec_params("UPDATE authors SET edit_count = edit_count + 1 WHERE id = #{author_id}")
       @entry_submitted = true
       erb :create_entry
@@ -179,11 +193,18 @@ module IowaMusic
       username = params['username']
       encrypted_password = BCrypt::Password.create(params['password'])
       email = params['email']
-      edit_count = '0'
-      conn.exec_params("INSERT INTO authors (username, email, password_digest, edit_count) VALUES ($1, $2, $3, $4)",
+      edit_count = 0
+      @author = conn.exec_params("SELECT * FROM authors WHERE username = $1", [params['username']]).first
+      
+      if @author
+        @error = "Invalid Username"
+        erb :signup
+      else
+       conn.exec_params("INSERT INTO authors (username, email, password_digest, edit_count) VALUES ($1, $2, $3, $4)",
         [username, email, encrypted_password, edit_count]
-      )
-      erb :signupsuccess
+        )
+        erb :signupsuccess
+      end
     end
 
     #############
